@@ -23,6 +23,8 @@ namespace Rejestracja
         public EditAppointment()
         {
             InitializeComponent();
+            DatapickerEdit.BlackoutDates.AddDatesInPast();
+         //DatapickerAdd.BlackoutDates.Add(new CalendarDateRange(Start,End)); //end data wizyty -1  start-DateTime.Now.AddDays(-1)
         }
     }
 }

@@ -21,8 +21,21 @@ namespace Rejestracja
     public partial class AddAppointment : Page
     {
         public AddAppointment()
-        {
+        {  
             InitializeComponent();
+            DatapickerAdd.BlackoutDates.AddDatesInPast();
+            DatapickerAdd.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddDays(-1)));
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

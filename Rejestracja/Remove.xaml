@@ -9,6 +9,11 @@
       Title="Remove">
 
     <Grid>
-        <Label Content="Usuń OSOBE" HorizontalAlignment="Left" Margin="384,127,0,0" VerticalAlignment="Top"/>
+        <Grid HorizontalAlignment="Left" Height="419" Margin="-86,0,0,0" VerticalAlignment="Top" Width="802">
+            <Label Content="Wybierz osobe:" HorizontalAlignment="Left" Margin="211,168,0,0" VerticalAlignment="Top"/>
+            <ComboBox Name="ComboBoxRemove" HorizontalAlignment="Left" Margin="193,197,0,0" VerticalAlignment="Top" Width="129" />
+            <Button Content="Usuń" HorizontalAlignment="Left" Margin="371,197,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click"/>
+            <Label Content="Usuń osobe " HorizontalAlignment="Left" Margin="315,85,0,0" VerticalAlignment="Top" Height="40" Width="86"/>
+        </Grid>
     </Grid>
 </Page>

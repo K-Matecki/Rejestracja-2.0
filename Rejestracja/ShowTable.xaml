@@ -9,6 +9,10 @@
       Title="ShowTable">
 
     <Grid>
-        <Label Content="Pokaż liste OSOBA" HorizontalAlignment="Left" Margin="384,127,0,0" VerticalAlignment="Top"/>
+        <Grid HorizontalAlignment="Left" Height="419" Margin="-93,-55,0,0" VerticalAlignment="Top" Width="802">
+            <Label Content="Wszystko" HorizontalAlignment="Left" Margin="283,153,0,0" VerticalAlignment="Top"/>
+            <DataGrid HorizontalAlignment="Left" Height="217" Margin="158,192,0,0" VerticalAlignment="Top" Width="349"/>
+
+        </Grid>
     </Grid>
 </Page>

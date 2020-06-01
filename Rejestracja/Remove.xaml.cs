@@ -23,6 +23,13 @@ namespace Rejestracja
         public Remove()
         {
             InitializeComponent();
+            //ComboBoxRemove.ItemsSource = DataBase.GetData("select * from patient");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(ComboBoxRemove.SelectedItem.ToString());
+
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
 
 namespace Rejestracja
 {
@@ -20,6 +21,7 @@ namespace Rejestracja
     /// </summary>
     public partial class UserControlMenuItem : UserControl
     {
+        PackIconKind Icon;
         MainWindow _context;
         public UserControlMenuItem(ItemMenu itemMenu, MainWindow context)
         {
@@ -28,6 +30,7 @@ namespace Rejestracja
             ExpanderMenu.Visibility = itemMenu.SubItems == null ? Visibility.Collapsed : Visibility.Visible;
             ListViewItemMenu.Visibility = itemMenu.SubItems == null ? Visibility.Visible : Visibility.Collapsed;
             this.DataContext = itemMenu;
+            Icon = itemMenu.Icon;
         }
       
         private void ListViewMenuSelection(object sender, SelectionChangedEventArgs args)

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\App.xaml
-81751738865
+8-627082450
 
-161380379190
+21-970647130
 129-481229146
-AddAppointment.xaml;AddPerson.xaml;EditAppointment.xaml;EditPerson.xaml;MainWindow.xaml;Remove.xaml;ShowTable.xaml;UserControlMenuItem.xaml;
+PAddAppointment.xaml;PAddPerson.xaml;PEditAppointment.xaml;PEditPerson.xaml;MainWindow.xaml;PRemove.xaml;PShowTable.xaml;UserControlMenuItem.xaml;
 
-True
+False
 

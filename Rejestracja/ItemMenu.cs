@@ -12,7 +12,7 @@ namespace Rejestracja
     {
         public string Header { get; private set; }
         public List<SubItem> SubItems { get; private set; }
-        PackIconKind Icon { get;  set; }
+       public PackIconKind Icon { get;  set; }
  
 
         public ItemMenu(string header, List<SubItem> subItems ,PackIconKind icon)

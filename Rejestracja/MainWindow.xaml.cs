@@ -60,27 +60,28 @@ namespace Rejestracja
             {
                 case 1:
                 case 5:
-                    Main.Content = new AddPerson();
+                    Main.Content = new PAddPerson();
+                  
                     break;
                 case 2:
                 case 6:
                 case 10:
-                    Main.Content = new Remove();
+                    Main.Content = new PRemove();
                     break;
                 case 3:
                 case 7:
-                    Main.Content = new EditPerson();
+                    Main.Content = new PEditPerson();
                     break;
                 case 4:
                 case 8:
                 case 12:
-                    Main.Content = new ShowTable();
+                    Main.Content = new PShowTable();
                     break;
                     case 9:
-                    Main.Content = new AddAppointment();
+                    Main.Content = new PAddAppointment();
                     break;
                 case 11:
-                    Main.Content = new EditAppointment();
+                    Main.Content = new PEditAppointment();
                     break;
             }
         

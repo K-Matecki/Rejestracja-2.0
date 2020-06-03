@@ -38,7 +38,7 @@ namespace Rejestracja {
     /// <summary>
     /// Remove
     /// </summary>
-    public partial class Remove : System.Windows.Controls.Page, System.Windows.Markup.IComponentConnector {
+    public partial class Remove_Page : System.Windows.Controls.Page, System.Windows.Markup.IComponentConnector {
         
         
         #line 14 "..\..\Remove.xaml"

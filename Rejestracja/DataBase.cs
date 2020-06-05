@@ -15,20 +15,20 @@ namespace Rejestracja
         private static string Port = "5432";
         private static string ConnString = String.Format($"Server={Host};Username={User};Database={DBname};Port={Port};Password={Password};SSLMode=Prefer");
         private static List<string> DataItems = new List<string>();
+        private static NpgsqlConnection Connection = new NpgsqlConnection(ConnString);
 
-        public static List<string> GetData(string SQLCommand)
+        public static List<string> GetData(string SQLCommand, string TableName)
         {
             try
             {
-                var Connection = new NpgsqlConnection(ConnString);
-                Console.Out.WriteLine("Opening connection");
+                int ColumnCount = GetColumnNumber(TableName);
                 Connection.Open();
                 var Command = new NpgsqlCommand(SQLCommand, Connection);
                 NpgsqlDataReader DataReader = Command.ExecuteReader();
-               // NpgsqlDataReader ColumnInfo = new NpgsqlCommand($"SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_catalog = '{DBname}' AND table_name='doctors'", Connection).ExecuteReader();
-                int ColumnCount = 6;
-                string Add="";
-                
+
+                Console.WriteLine(ColumnCount);
+                string Add = "";
+
                 while (DataReader.Read())
                 {
                     for (int i = 0; i < ColumnCount; i++)
@@ -41,7 +41,7 @@ namespace Rejestracja
                     Add = "";
                 }
                 Connection.Close();
-                return DataItems; 
+                return DataItems;
             }
             catch (Exception e)
             {
@@ -54,8 +54,6 @@ namespace Rejestracja
         {
             try
             {
-                var Connection = new NpgsqlConnection(ConnString);
-                Console.Out.WriteLine("Opening connection");
                 Connection.Open();
                 var Command = new NpgsqlCommand(SQLCommand, Connection);
                 Command.ExecuteNonQuery();
@@ -70,7 +68,49 @@ namespace Rejestracja
             
         }
 
-       
+        private static int GetColumnNumber(string TableName)
+        {
+            int ColumnCount;
+            var Connection = new NpgsqlConnection(ConnString);
+            Connection.Open();
+            NpgsqlDataReader ColumnInfo = new NpgsqlCommand($"SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE table_catalog = '{DBname}' AND table_name='{TableName}'", Connection).ExecuteReader();
+            ColumnInfo.Read();
+            int.TryParse(ColumnInfo[0].ToString(), out ColumnCount);
+            Connection.Close();
+            return ColumnCount;
+        }
+
+        static public int GetNextIndex(string TableName)
+        {
+            int Id;
+            string IdName = "id_";
+            switch (TableName)
+            {
+                case "doctors":
+                    IdName += "doctor";
+                    break;
+                case "patients":
+                    IdName += "patient";
+                    break;
+                case "appointments":
+                    IdName += "appointment";
+                    break;
+                default:
+                    IdName = null;
+                    break;
+            }
+
+            Connection.Open();
+            NpgsqlDataReader IdInfo = new NpgsqlCommand($"SELECT Max({IdName}) FROM {TableName} limit 1", Connection).ExecuteReader();
+            IdInfo.Read();
+            int.TryParse(IdInfo[0].ToString(), out Id);
+            Console.WriteLine(Id);
+            Connection.Close();
+            if (Id == 0)
+                return 1;
+            return Id + 1;
+        }
     }
 }
+
 

@@ -55,27 +55,28 @@ namespace Rejestracja
 
        internal void SwitchScreen(int Id)
         {
-       
+            
+
+
             switch (Id)
             {
                 case 1:
                 case 5:
-                    Main.Content = new PAddPerson();
-                  
-                    break;
+                    Main.Content = new PAddPerson(Id);
+                  break;
                 case 2:
                 case 6:
                 case 10:
-                    Main.Content = new PRemove();
+                    Main.Content = new PRemove(Id);
                     break;
                 case 3:
                 case 7:
-                    Main.Content = new PEditPerson();
+                    //Main.Content = new PEditPerson(Id);
                     break;
                 case 4:
                 case 8:
                 case 12:
-                    Main.Content = new PShowTable();
+                   // Main.Content = new PShowTable(Id);
                     break;
                     case 9:
                     Main.Content = new PAddAppointment();
@@ -84,7 +85,7 @@ namespace Rejestracja
                     Main.Content = new PEditAppointment();
                     break;
             }
-        
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

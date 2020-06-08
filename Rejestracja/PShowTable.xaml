@@ -10,8 +10,8 @@
 
     <Grid>
         <Grid HorizontalAlignment="Left" Height="419" Margin="-93,-55,0,0" VerticalAlignment="Top" Width="802">
-            <Label Content="Wszystko" HorizontalAlignment="Left" Margin="283,153,0,0" VerticalAlignment="Top"/>
-            <DataGrid HorizontalAlignment="Left" Height="217" Margin="158,192,0,0" VerticalAlignment="Top" Width="349"/>
+            <Label Content="wszyscy  z bazy" HorizontalAlignment="Left" Margin="283,153,0,0" VerticalAlignment="Top"/>
+            <DataGrid Name="Table" HorizontalAlignment="Left" Height="217" Margin="158,192,0,0" VerticalAlignment="Top" Width="349"/>
 
         </Grid>
     </Grid>

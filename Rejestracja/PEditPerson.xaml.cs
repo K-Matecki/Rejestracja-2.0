@@ -20,9 +20,28 @@ namespace Rejestracja
     /// </summary>
     public partial class PEditPerson : Page
     {
+        
+        
         public PEditPerson()
         {
             InitializeComponent();
+        }
+        public PEditPerson(int MenuID) : this()
+        { 
+          ComboBoxEdit.ItemsSource = DataBase.GetComboBoxList(MenuID); 
+        }
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            NameText.Text = DataBase.PersonList[ComboBoxEdit.SelectedIndex].Name;
+            SurnameText.Text = DataBase.PersonList[ComboBoxEdit.SelectedIndex].Surname;
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string Message;
+            Message= DataBase.PersonList[ComboBoxEdit.SelectedIndex].EditInDatabase(NameText.Text, SurnameText.Text) ? "Pomyślnie edytowano osobe":"Nie udało sie edytować osoby";
+            MessageBox.Show(Message);
         }
     }
 }

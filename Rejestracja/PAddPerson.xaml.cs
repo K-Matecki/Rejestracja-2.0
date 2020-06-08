@@ -39,7 +39,7 @@ namespace Rejestracja
         {
         
            NewPerson = child == true ? NewPerson = new Patient(NameText.Text, SurnameText.Text, PeselText.Text) : NewPerson = new Doctor(NameText.Text, SurnameText.Text, PeselText.Text);
-            NewPerson.UpdateAppointments();
+           // NewPerson.UpdateAppointments();
             
         }
 

@@ -14,31 +14,32 @@ namespace Rejestracja
         private static string Password = "123";
         private static string Port = "5432";
         private static string ConnString = String.Format($"Server={Host};Username={User};Database={DBname};Port={Port};Password={Password};SSLMode=Prefer");
-        private static List<string> DataItems = new List<string>();
         private static NpgsqlConnection Connection = new NpgsqlConnection(ConnString);
+        public static List<Person> PersonList { get { return _personList; } } 
+        private static List<Person> _personList = new List<Person>();
 
+        //dodać sprawdzenie połączenia 
         public static List<string> GetData(string SQLCommand, string TableName)
         {
+            List<string> DataItems = new List<string>();
+            int ColumnNumber = GetColumnNumber(TableName);
+            string AddString = "";
             try
             {
-                int ColumnCount = GetColumnNumber(TableName);
                 Connection.Open();
                 var Command = new NpgsqlCommand(SQLCommand, Connection);
                 NpgsqlDataReader DataReader = Command.ExecuteReader();
 
-                Console.WriteLine(ColumnCount);
-                string Add = "";
-
                 while (DataReader.Read())
                 {
-                    for (int i = 0; i < ColumnCount; i++)
+                    for (int i = 0; i < ColumnNumber; i++)
                     {
-                        Add += DataReader[i].ToString();
-                        Add += ",";
+                        AddString += DataReader[i].ToString();
+                        AddString += ",";
                     }
-                    Add += ";";
-                    DataItems.Add(Add);
-                    Add = "";
+                    AddString += ";";
+                    DataItems.Add(AddString);
+                    AddString = "";
                 }
                 Connection.Close();
                 return DataItems;
@@ -110,7 +111,53 @@ namespace Rejestracja
                 return 1;
             return Id + 1;
         }
+        public static List<string> GetComboBoxList(int MenuID)
+        {
+            string[] Line;
+            List<string> ComboBoxList = new List<string>();
+            List<string> StringData = GetStringDataList(MenuID);
+
+
+            if (_personList.Count != 0)
+                _personList.Clear();
+
+            foreach (var item in StringData)
+            {
+                Line = item.Split(',');
+                _personList.Add(new Patient(int.Parse(Line[0]), Line[1], Line[2], Line[3])); 
+                
+            }
+            
+
+            foreach (var item in _personList)
+            {
+                ComboBoxList.Add($"{item.Name} {item.Surname}");
+            }
+            return ComboBoxList;
+        }
+
+        public static List<string> GetStringDataList(int MenuID) {
+           
+            List<string> StringData = new List<string>();
+        
+            switch (MenuID)
+            {
+                case 2:
+                case 3:
+                    StringData = GetData("select * from patients", "patients");
+                    break;
+                case 6:
+                case 7:
+                    StringData = GetData("select * from doctors", "doctors");
+                    break;
+                case 10:
+                    StringData = GetData("select * from appointments", "appointments");
+                    break;
+            }
+            return StringData;
+        }
     }
+
 }
 
 

@@ -11,15 +11,13 @@
     <Grid>
         <Grid HorizontalAlignment="Left" Height="419" Margin="-93,-55,0,0" VerticalAlignment="Top" Width="802">
             <Label Content="Wybierz OSOBE" HorizontalAlignment="Left" Margin="342,152,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name = "NameText" HorizontalAlignment="Left" Height="23" Margin="331,308,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-            <ComboBox HorizontalAlignment="Left" Margin="322,181,0,0" VerticalAlignment="Top" Width="129" />
+            <ComboBox  Name="ComboBoxEdit"  HorizontalAlignment="Left" Margin="243,181,0,0" VerticalAlignment="Top" Width="310" SelectionChanged="ComboBox_SelectionChanged" />
             <Label Content="Imie:" HorizontalAlignment="Left" Margin="291,224,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.25,0.671"/>
             <TextBox Name="SurnameText" HorizontalAlignment="Left" Height="23" Margin="331,266,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
             <Label Content="Nazwisko:" HorizontalAlignment="Left" Margin="268,263,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.25,0.671"/>
-            <TextBox Name="PeselText"  HorizontalAlignment="Left" Height="23" Margin="331,224,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.145,0.64"/>
-            <Label Content="Pesel:" HorizontalAlignment="Left" Margin="287,305,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.25,0.671"/>
+            <TextBox Name="NameText"  HorizontalAlignment="Left" Height="23" Margin="331,224,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.145,0.64"/>
             <Label Content="Edytuj OSOBE" HorizontalAlignment="Left" Margin="342,106,0,0" VerticalAlignment="Top"/>
-            <Button Content="Wprowadz zmiany" HorizontalAlignment="Left" Margin="301,358,0,0" VerticalAlignment="Top" Width="150"/>
+            <Button Content="Wprowadz zmiany" HorizontalAlignment="Left" Margin="301,323,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click"/>
         </Grid>
     </Grid>
 </Page>

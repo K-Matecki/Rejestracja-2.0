@@ -30,7 +30,7 @@ namespace Rejestracja
             _idDoctor = GetHashCode();//z bazy 
             return false;
         }
-        public override bool Edit()
+        public override bool EditInDatabase(string name, string surname)
         {
             return false;
         }

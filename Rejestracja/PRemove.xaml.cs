@@ -20,8 +20,8 @@ namespace Rejestracja
     /// </summary>
     public partial class PRemove : Page
     {
-        private List<Person> PersonList = new List<Person>();
-        private List<string> StringData = new List<string>();
+        
+        private int Menu;
         public PRemove()
         {
             InitializeComponent();
@@ -29,43 +29,22 @@ namespace Rejestracja
         }
         public PRemove(int MenuID):this()
         {
-            switch (MenuID)
-            {
-                case 2:
-                    StringData = DataBase.GetData("select * from patients", "patients");
-                    break;
-                case 6:
-                    StringData = DataBase.GetData("select * from doctors", "doctors");
-                    break;
-                case 10:
-                    StringData = DataBase.GetData("select * from appointments", "appointments");
-                    break;
-            }
-
-            string[] Line;
-            List<string> ComboBoxList = new List<string>();
-
-            foreach (var item in StringData)
-            {
-                Line = item.Split(',');
-                PersonList.Add(new Patient(int.Parse(Line[0]), Line[1], Line[2], Line[3]));
-            }
-            foreach (var item in PersonList)
-            {
-                ComboBoxList.Add($"{item.Name} {item.Surname}");
-            }
-
-
-            ComboBoxRemove.ItemsSource = ComboBoxList;
+            Menu = MenuID;
+            UpdateComboBoxRemove();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
-            if(PersonList[ComboBoxRemove.SelectedIndex].Remove())
-            MessageBox.Show($"Usunięto {PersonList[ComboBoxRemove.SelectedIndex].Name}");
-            PersonList.Remove(PersonList[ComboBoxRemove.SelectedIndex]);
-          
+            if(DataBase.PersonList[ComboBoxRemove.SelectedIndex].Remove())
+            MessageBox.Show($"Usunięto {DataBase.PersonList[ComboBoxRemove.SelectedIndex].Name}");
+           // DataBase.PersonList.Remove(DataBase.PersonList[ComboBoxRemove.SelectedIndex]);
+            UpdateComboBoxRemove();
+        }
+        private void UpdateComboBoxRemove()
+        {
+            
+            ComboBoxRemove.ItemsSource = DataBase.GetComboBoxList(Menu);
         }
     }
 }

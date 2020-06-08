@@ -8,18 +8,18 @@ using System.Windows;
 
 namespace Rejestracja
 {
-   public class Person :IModify
+   public class Person  
     {
-        private string _name;
-        private string _surname;
-        private string _pesel;
+        protected string _name;
+        protected string _surname;
+        protected string _pesel;
         private Gender _sex;
         public enum Gender { K, M, Empty };
         private DateTime _birthday;
         private int _age;
-        private TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
-        public string Name { get { return ti.ToTitleCase(_name); } }
-        public string Surname { get { return ti.ToTitleCase(_surname); } }
+        private TextInfo _textinfo = CultureInfo.CurrentCulture.TextInfo;
+        public string Name { get { return _textinfo.ToTitleCase(_name); } }
+        public string Surname { get { return _textinfo.ToTitleCase(_surname); } }
         public string Pesel { get { return _pesel; } }
         public Gender Sex { get { return _sex; } }
         public DateTime BirthDay { get { return _birthday; } }
@@ -49,12 +49,18 @@ namespace Rejestracja
             {
                 _pesel = pesel;
                 GetBirthDay(_pesel);
-                _sex = pesel[9] % 2 == 0 ? Gender.K : Gender.M; 
-                _age = DateTime.Today.Year - BirthDay.Year; 
+                _sex = pesel[9] % 2 == 0 ? Gender.K : Gender.M;
+                _age = DateTime.Today.Year - BirthDay.Year;
             }
         }
     
-        public virtual bool Edit()
+      
+        protected void Edit(string name, string surname)
+        {
+            _name = name;
+            _surname = surname;
+        }
+        public virtual bool EditInDatabase(string name, string surname)
         {
             throw new Exception("Metoda nie została zdefiniowana");
         }
@@ -109,7 +115,7 @@ namespace Rejestracja
             return true;
         }
         //funkcja przypisująca wiek na podstawie podanego peselu 
-        private void GetBirthDay(string pesel)
+        protected void GetBirthDay(string pesel)
         {
             int Year = 0, Month = 0, Day = 0;
             string s_year = string.Empty;

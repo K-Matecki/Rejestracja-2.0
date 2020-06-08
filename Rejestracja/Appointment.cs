@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rejestracja
 {
-    public class Appointment : IModify
+    public class Appointment    
     {
         public DateTime Data;
         public Person Lekarz;

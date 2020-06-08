@@ -20,9 +20,14 @@ namespace Rejestracja
     /// </summary>
     public partial class PShowTable : Page
     {
+        private List<Person> PersonList = new List<Person>();
         public PShowTable()
         {
             InitializeComponent();
+        }
+        public PShowTable(int MenuId)
+        {
+            
         }
     }
 }

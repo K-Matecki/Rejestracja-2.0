@@ -27,8 +27,8 @@ namespace Rejestracja
             var MenuPatients = new List<SubItem>();
             MenuPatients.Add(new SubItem("Dodaj pacjenta",1));
             MenuPatients.Add(new SubItem("Usuń pacjenta", 2));
-            MenuPatients.Add(new SubItem("Edytuj informacje o pacjęcie",3));
-            MenuPatients.Add(new SubItem("Wyświetl wszystkich pacjętów",4));
+            MenuPatients.Add(new SubItem("Edytuj informacje o pacjencie",3));
+            MenuPatients.Add(new SubItem("Wyświetl wszystkich pacjentów", 4));
 
             var Item0 = new ItemMenu("Pacjent", MenuPatients, PackIconKind.UserHeart);
 
@@ -71,12 +71,12 @@ namespace Rejestracja
                     break;
                 case 3:
                 case 7:
-                    //Main.Content = new PEditPerson(Id);
+                    Main.Content = new PEditPerson(Id);
                     break;
                 case 4:
                 case 8:
                 case 12:
-                   // Main.Content = new PShowTable(Id);
+                    Main.Content = new PShowTable(Id);
                     break;
                     case 9:
                     Main.Content = new PAddAppointment();
@@ -92,7 +92,7 @@ namespace Rejestracja
         {
             //var = NameText.Text;
            
-           // MessageBox.Show(Doctor.IsChecked == true ? "u" : "fuck0");
+           
         }
 
       

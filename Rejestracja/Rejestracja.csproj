@@ -96,7 +96,6 @@
     </ApplicationDefinition>
     <Compile Include="Appointment.cs" />
     <Compile Include="Doctor.cs" />
-    <Compile Include="IModify.cs" />
     <Compile Include="PAddAppointment.xaml.cs">
       <DependentUpon>PAddAppointment.xaml</DependentUpon>
     </Compile>

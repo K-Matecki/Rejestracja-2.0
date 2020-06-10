@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace Rejestracja
 {
-    class Patient : Person
+    public class Patient : Person
     {
         public int IdPatient { get { return _idPatient; } }
         private int _idPatient;
@@ -24,6 +24,10 @@ namespace Rejestracja
         public Patient(int id ,string imie, string nazwisko, string pesel) : base(imie, nazwisko, pesel)
         {
             _idPatient = id;
+        }
+        public Patient(string[] Line) : base( Line[1], Line[2], Line[3])
+        {
+            _idPatient = int.Parse(Line[0]);
         }
         //funkcja dodająca obiekt do bazy ustawia id obiektu zgodne z rekordem w bazie
         private void Add()
@@ -49,10 +53,8 @@ namespace Rejestracja
         }
         public override void  UpdateAppointments()
         {
-            List<string> test = new List<string>();
-            test = DataBase.GetData($"SELECT * FROM appontments where id_patient='{IdPatient}' ", "patients");
-            if (test == null)
-                MessageBox.Show("Ten pacjent nie ma terminów");
+           
+            PatientAppointments = DataBase.UpdateAppointmentList(IdPatient);
         }
     }
 }

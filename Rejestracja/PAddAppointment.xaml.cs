@@ -20,22 +20,37 @@ namespace Rejestracja
     /// </summary>
     public partial class PAddAppointment : Page
     {
+        private List<Doctor> DoctorList = new List<Doctor>();
+        private List<Patient> PatientList = new List<Patient>();
         public PAddAppointment()
         {
             InitializeComponent();
             DatapickerAdd.BlackoutDates.AddDatesInPast();
             DatapickerAdd.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddDays(-1)));
+           
+            ComboBoxPatient.ItemsSource = DataBase.GetComboBoxList(2);
+            
+            foreach (var item in DataBase.PersonList)
+                PatientList.Add((Patient)item);
+
+            
+            ComboBoxDoctor.ItemsSource = DataBase.GetComboBoxList(6);
+            
+            foreach (var item in DataBase.PersonList)
+                DoctorList.Add((Doctor)item);
 
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            //dodać sprawdzanie dostępności terminów
+        
+            string Date = DatapickerAdd.ToString().Remove(10);
+            Date += ClockAdd.Time.ToString().Remove(0,10);
+            DateTime AppointmentDate =  Convert.ToDateTime(Date);
+            Appointment NewAppointment;
+            NewAppointment = new Appointment(AppointmentDate, DoctorList[ComboBoxPatient.SelectedIndex], PatientList[ComboBoxPatient.SelectedIndex]);
         }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+        
     }
 }

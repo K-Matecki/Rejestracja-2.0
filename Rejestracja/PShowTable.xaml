@@ -9,10 +9,25 @@
       Title="ShowTable">
 
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="419" Margin="-93,-55,0,0" VerticalAlignment="Top" Width="802">
-            <Label Content="wszyscy  z bazy" HorizontalAlignment="Left" Margin="283,153,0,0" VerticalAlignment="Top"/>
-            <DataGrid Name="Table" HorizontalAlignment="Left" Height="217" Margin="158,192,0,0" VerticalAlignment="Top" Width="349"/>
-
+        <Grid HorizontalAlignment="Left" Height="419" Margin="-2,10,0,0" VerticalAlignment="Top" Width="802">
+            <Label Content="Wybierz  " HorizontalAlignment="Left" Margin="267,85,0,0" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="230"/>
+            <DataGrid Name="AppointmentsTable" AutoGenerateColumns="False" Margin="135,290,285,43" IsReadOnly="True" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Termin" Binding="{Binding AppointmentDate}" />
+                    <DataGridTextColumn Header="Nazwisko lekarza" Binding="{Binding Doctor.Surname}" />
+                    <DataGridTextColumn Header="Nazwisko Pacjenta" Binding="{Binding Patient.Surname}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <ComboBox Name="ComboBoxShow" HorizontalAlignment="Left" Margin="135,132,0,0" VerticalAlignment="Top" Width="382" SelectionChanged="ComboBox_SelectionChanged"/>
+            <DataGrid Name="PersonTable" AutoGenerateColumns="False" Margin="135,180,285,153" IsReadOnly="True" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Imie" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" />
+                    <DataGridTextColumn Header="Pesel" Binding="{Binding Pesel}" />
+                    <DataGridTextColumn Header="Wiek" Binding="{Binding Age}" />
+                    <DataGridTextColumn Header="Płeć" Binding="{Binding Sex}" />
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </Page>

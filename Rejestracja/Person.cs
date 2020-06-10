@@ -22,7 +22,7 @@ namespace Rejestracja
         public string Surname { get { return _textinfo.ToTitleCase(_surname); } }
         public string Pesel { get { return _pesel; } }
         public Gender Sex { get { return _sex; } }
-        public DateTime BirthDay { get { return _birthday; } }
+        private DateTime BirthDay { get { return _birthday; } }
         public int Age { get { return _age; } }
 
 

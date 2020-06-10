@@ -12,10 +12,10 @@
     <Grid>
         <Grid HorizontalAlignment="Left" Height="450" Margin="0,0,-2,0" VerticalAlignment="Top" Width="802">
             <Button Content="Dodaj termin" HorizontalAlignment="Left" Margin="307,326,0,0" VerticalAlignment="Top" Width="124" Click="Button_Click" RenderTransformOrigin="0.464,-1"/>
-            <DatePicker x:Name="DatapickerAdd" HorizontalAlignment="Left" Margin="307,239,0,0" VerticalAlignment="Top" Height="44" Width="129" IsTodayHighlighted="True" />
-            <materialDesign:Clock HorizontalAlignment="Left" Margin="0,-30,0,0" VerticalAlignment="Top" Height="480" Width="286" AutomationProperties.IsRequiredForForm="True" Is24Hours="True" IsPostMeridiem="True" />
-            <ComboBox HorizontalAlignment="Left" Margin="307,206,0,0" VerticalAlignment="Top" Width="129" SelectionChanged="ComboBox_SelectionChanged"/>
-            <ComboBox HorizontalAlignment="Left" Margin="307,153,0,0" VerticalAlignment="Top" Width="129" SelectionChanged="ComboBox_SelectionChanged"/>
+            <DatePicker x:Name="DatapickerAdd" HorizontalAlignment="Left" Margin="307,239,0,0" VerticalAlignment="Top" Height="44" Width="129" IsTodayHighlighted="True" SelectedDateFormat="Long" />
+            <materialDesign:Clock Name="ClockAdd"  HorizontalAlignment="Left" Margin="0,-30,0,0" VerticalAlignment="Top" Height="480" Width="286" AutomationProperties.IsRequiredForForm="True" Is24Hours="True" IsPostMeridiem="True" />
+            <ComboBox Name="ComboBoxPatient" HorizontalAlignment="Left" Margin="307,206,0,0" VerticalAlignment="Top" Width="129" />
+            <ComboBox Name="ComboBoxDoctor" HorizontalAlignment="Left" Margin="307,153,0,0" VerticalAlignment="Top" Width="129" />
             <Label Content="Lekarz" HorizontalAlignment="Left" Margin="307,131,0,0" VerticalAlignment="Top" Height="22" Width="99"/>
             <Label Content="Pacjent" HorizontalAlignment="Left" Margin="307,186,0,0" VerticalAlignment="Top" Height="28" Width="99"/>
             <Label Content="Data" HorizontalAlignment="Left" Margin="307,239,0,0" VerticalAlignment="Top" Height="38" Width="99"/>

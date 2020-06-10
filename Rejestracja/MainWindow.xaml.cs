@@ -28,7 +28,7 @@ namespace Rejestracja
             MenuPatients.Add(new SubItem("Dodaj pacjenta",1));
             MenuPatients.Add(new SubItem("Usuń pacjenta", 2));
             MenuPatients.Add(new SubItem("Edytuj informacje o pacjencie",3));
-            MenuPatients.Add(new SubItem("Wyświetl wszystkich pacjentów", 4));
+            MenuPatients.Add(new SubItem("Wyświetl informacje o pacjencie", 4));
 
             var Item0 = new ItemMenu("Pacjent", MenuPatients, PackIconKind.UserHeart);
 
@@ -36,7 +36,7 @@ namespace Rejestracja
             MenuDoctors.Add(new SubItem("Dodaj lekarza",5));
             MenuDoctors.Add(new SubItem("Usuń lekarza",6));
             MenuDoctors.Add(new SubItem("Edytuj informacje o lekarzu",7));
-            MenuDoctors.Add(new SubItem("Wyświetl wszystkich lekarzy",8));
+            MenuDoctors.Add(new SubItem("Wyświetl informacje o lekarzu", 8));
             var Item1 = new ItemMenu("Lekarz", MenuDoctors, PackIconKind.Doctor);
 
             var MenuApointments = new List<SubItem>();
@@ -56,8 +56,6 @@ namespace Rejestracja
        internal void SwitchScreen(int Id)
         {
             
-
-
             switch (Id)
             {
                 case 1:
@@ -75,25 +73,24 @@ namespace Rejestracja
                     break;
                 case 4:
                 case 8:
-                case 12:
+               
                     Main.Content = new PShowTable(Id);
                     break;
                     case 9:
                     Main.Content = new PAddAppointment();
                     break;
                 case 11:
-                    Main.Content = new PEditAppointment();
+                    Main.Content = new PEditAppointment(Id);
                     break;
+                case 12:
+                   // Main.Content
+                    break;
+               
             }
            
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //var = NameText.Text;
-           
-           
-        }
+     
 
       
        

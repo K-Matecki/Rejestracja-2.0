@@ -20,18 +20,20 @@ namespace Rejestracja
     /// </summary>
     public partial class PEditPerson : Page
     {
-        
-        
+        private int Menu;
         public PEditPerson()
         {
             InitializeComponent();
         }
         public PEditPerson(int MenuID) : this()
-        { 
-          ComboBoxEdit.ItemsSource = DataBase.GetComboBoxList(MenuID); 
+        {
+            Menu = MenuID;
+            UpdateComboBoxEdit();
+           
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             NameText.Text = DataBase.PersonList[ComboBoxEdit.SelectedIndex].Name;
             SurnameText.Text = DataBase.PersonList[ComboBoxEdit.SelectedIndex].Surname;
             
@@ -42,6 +44,11 @@ namespace Rejestracja
             string Message;
             Message= DataBase.PersonList[ComboBoxEdit.SelectedIndex].EditInDatabase(NameText.Text, SurnameText.Text) ? "Pomyślnie edytowano osobe":"Nie udało sie edytować osoby";
             MessageBox.Show(Message);
+            // UpdateComboBoxEdit(); //ComboBoxEdit.SelectedIndex zwraca -1 w przypadku pacjenta ??
+        }
+        private void UpdateComboBoxEdit()
+        {
+            ComboBoxEdit.ItemsSource = DataBase.GetComboBoxList(Menu);
         }
     }
 }

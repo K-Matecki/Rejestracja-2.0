@@ -22,9 +22,23 @@ namespace Rejestracja
     {
         public PEditAppointment()
         {
-            InitializeComponent();
-            DatapickerEdit.BlackoutDates.AddDatesInPast();
-         //DatapickerAdd.BlackoutDates.Add(new CalendarDateRange(Start,End)); //end data wizyty -1  start-DateTime.Now.AddDays(-1)
+            InitializeComponent(); DatapickerEdit.BlackoutDates.AddDatesInPast();
+            DatapickerEdit.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddDays(-1)));
+            
+        }
+        public PEditAppointment(int MenuId):this()
+        {
+            ComboBoxEditA.ItemsSource = DataBase.GetComboBoxList(MenuId);
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string Message;
+            string Date = DatapickerEdit.ToString().Remove(10);
+            Date += ClockEdit.Time.ToString().Remove(0, 10);
+            DateTime AppointmentDate = Convert.ToDateTime(Date);
+
+            Message = DataBase.AppointmentList[ComboBoxEditA.SelectedIndex].Edit(AppointmentDate) ? "Pomyślnie edytowano Termin" : "Nie udało sie edytować Terminu";
+            MessageBox.Show(Message);
         }
     }
 }

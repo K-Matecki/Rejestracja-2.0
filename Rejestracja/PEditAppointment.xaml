@@ -10,11 +10,14 @@
       Title="EditAppointment">
 
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="460" Margin="-185,-20,0,0" VerticalAlignment="Top" Width="790">
-            <Button Content="Edytuj wizyte" HorizontalAlignment="Left" Margin="325,314,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="0.464,-1"/>
-            <DatePicker x:Name="DatapickerEdit" HorizontalAlignment="Left" Margin="310,190,0,0" VerticalAlignment="Top" Height="29" Width="190" IsTodayHighlighted="True" />
-            <ComboBox HorizontalAlignment="Left" Margin="235,250,0,0" VerticalAlignment="Top" Width="300" Height="30"/>
-            <Label Content="Data:" HorizontalAlignment="Left" Margin="255,202,0,0" VerticalAlignment="Top" Height="38" Width="38" RenderTransformOrigin="0.105,0.711"/>
+        <Grid HorizontalAlignment="Left" Height="460" Margin="10,-10,0,0" VerticalAlignment="Top" Width="790">
+            <Button Content="Edytuj wizyte" HorizontalAlignment="Left" Margin="400,335,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="0.464,-1" Click="Button_Click"/>
+            <materialDesign:Clock Name="ClockEdit"  HorizontalAlignment="Left" Margin="0,0,0,-20" VerticalAlignment="Top" Height="480" Width="286" AutomationProperties.IsRequiredForForm="True" Is24Hours="True" IsPostMeridiem="True" />
+            <DatePicker x:Name="DatapickerEdit" HorizontalAlignment="Left" Margin="355,270,0,0" VerticalAlignment="Top" Height="29" Width="190" IsTodayHighlighted="True" />
+            <ComboBox  Name="ComboBoxEditA"  HorizontalAlignment="Left" Margin="291,185,0,0" VerticalAlignment="Top" Width="310" />
+            <Label Content="Wybierz:" HorizontalAlignment="Left" Margin="400,162,0,0" VerticalAlignment="Top" Height="38" Width="95" RenderTransformOrigin="0.105,0.711"/>
+            <Label Content="Data:" HorizontalAlignment="Left" Margin="305,282,0,0" VerticalAlignment="Top" Height="38" Width="95" RenderTransformOrigin="0.105,0.711"/>
+            
         </Grid>
     </Grid>
 </Page>

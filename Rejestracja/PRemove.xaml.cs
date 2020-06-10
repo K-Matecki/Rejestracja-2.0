@@ -35,10 +35,19 @@ namespace Rejestracja
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-            if(DataBase.PersonList[ComboBoxRemove.SelectedIndex].Remove())
-            MessageBox.Show($"Usunięto {DataBase.PersonList[ComboBoxRemove.SelectedIndex].Name}");
-           // DataBase.PersonList.Remove(DataBase.PersonList[ComboBoxRemove.SelectedIndex]);
+            switch (Menu)
+            {
+                case 2:
+                case 6:
+                    if (DataBase.PersonList[ComboBoxRemove.SelectedIndex].Remove())
+                        MessageBox.Show($"Usunięto {DataBase.PersonList[ComboBoxRemove.SelectedIndex].Name}");
+                    break;
+                case 10:
+                    if (DataBase.AppointmentList[ComboBoxRemove.SelectedIndex].Remove())
+                        MessageBox.Show($"Usunięto termin z dnia: {DataBase.AppointmentList[ComboBoxRemove.SelectedIndex].AppointmentDate.ToString()}");
+                    break;
+            }
+           
             UpdateComboBoxRemove();
         }
         private void UpdateComboBoxRemove()

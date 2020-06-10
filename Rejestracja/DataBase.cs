@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
+using System.Windows;
 namespace Rejestracja
 {
     class DataBase
@@ -15,9 +16,10 @@ namespace Rejestracja
         private static string Port = "5432";
         private static string ConnString = String.Format($"Server={Host};Username={User};Database={DBname};Port={Port};Password={Password};SSLMode=Prefer");
         private static NpgsqlConnection Connection = new NpgsqlConnection(ConnString);
-        public static List<Person> PersonList { get { return _personList; } } 
+        public static List<Person> PersonList { get { return _personList; } }
         private static List<Person> _personList = new List<Person>();
-
+        public static List<Appointment> AppointmentList { get { return _appointmentList; } }
+        private static List<Appointment> _appointmentList = new List<Appointment>();
         //dodać sprawdzenie połączenia 
         public static List<string> GetData(string SQLCommand, string TableName)
         {
@@ -63,10 +65,10 @@ namespace Rejestracja
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
                 return false;
             }
-            
+
         }
 
         private static int GetColumnNumber(string TableName)
@@ -116,48 +118,119 @@ namespace Rejestracja
             string[] Line;
             List<string> ComboBoxList = new List<string>();
             List<string> StringData = GetStringDataList(MenuID);
-
-
-            if (_personList.Count != 0)
-                _personList.Clear();
-
-            foreach (var item in StringData)
-            {
-                Line = item.Split(',');
-                _personList.Add(new Patient(int.Parse(Line[0]), Line[1], Line[2], Line[3])); 
-                
-            }
             
-
-            foreach (var item in _personList)
+            switch (MenuID) 
             {
-                ComboBoxList.Add($"{item.Name} {item.Surname}");
+                case 2:
+                case 3:
+                case 4:
+                case 6:
+                case 7:
+                case 8:
+                     if (_personList.Count != 0)
+                     _personList.Clear();
+
+                    foreach (var item in StringData)
+                    {
+                        Line = item.Split(',');
+                        switch (MenuID)
+                        {
+                            case 2:
+                            case 3:
+                            case 4:
+                                _personList.Add(new Patient(int.Parse(Line[0]), Line[1], Line[2], Line[3]));
+                                break;
+                            case 6:
+                            case 7:
+                            case 8:
+                                _personList.Add(new Doctor(int.Parse(Line[0]), Line[1], Line[2], Line[3]));
+                                break;
+                        }
+
+                    }
+
+                    foreach (var item in _personList)
+                    {
+                        ComboBoxList.Add($"{item.Name} {item.Surname}");
+                    }
+                    break;
+                case 10:
+                case 11:
+                case 12:
+                    if (_appointmentList.Count != 0)
+                        _appointmentList.Clear();
+                    GetAppointmentList(StringData);
+                    foreach (var item in AppointmentList)
+                    {
+                        ComboBoxList.Add($"{item.Doctor.Name} {item.Doctor.Surname}|{item.Patient.Name} {item.Patient.Surname}|{item.AppointmentDate.ToString()} ");
+                    }
+                    break;
             }
             return ComboBoxList;
         }
 
-        public static List<string> GetStringDataList(int MenuID) {
-           
+        public static List<string> GetStringDataList(int MenuID)
+        {
+
             List<string> StringData = new List<string>();
-        
+
             switch (MenuID)
             {
                 case 2:
                 case 3:
+                case 4:
                     StringData = GetData("select * from patients", "patients");
                     break;
                 case 6:
                 case 7:
+                case 8:
                     StringData = GetData("select * from doctors", "doctors");
                     break;
                 case 10:
+                case 11:
+                case 12:
                     StringData = GetData("select * from appointments", "appointments");
+                    break;
+                default:
+                    StringData.Add("");
                     break;
             }
             return StringData;
         }
-    }
+        public static List<Appointment> UpdateAppointmentList(int PersonID)
+        {
+            List<Appointment> AppointmentList = new List<Appointment>();
+            List<string> DataStringList = new List<string>();
+            DataStringList = GetData($"SELECT * FROM appointments where id_patient='{PersonID}' ", "appointments");
+          
+            
+            if (DataStringList == null)
+                MessageBox.Show("Ten osoba nie ma terminów");
+            else
+            GetAppointmentList(DataStringList);
+            
+            return AppointmentList;
 
+        }
+
+        private static void GetAppointmentList(List<string>  DataStringList)
+        {
+            List<string> StringDataDoctor, StringDataPatient;
+            string[] LineDoctor, LinePatient;
+            string[] LineAppointment;
+
+            foreach (var item in DataStringList)
+            {
+                LineAppointment = item.Split(',');
+                StringDataDoctor = DataBase.GetData($"select * from doctors where id_doctor = {LineAppointment[1]}", "doctors");
+                StringDataPatient = DataBase.GetData($"select * from patients where id_patient = {LineAppointment[2]}", "patients");
+                LineDoctor = StringDataDoctor[0].Split(',');
+                LinePatient = StringDataPatient[0].Split(',');
+                _appointmentList.Add(new Appointment(int.Parse(LineAppointment[0]), Convert.ToDateTime(LineAppointment[3]), new Doctor(LineDoctor), new Patient(LinePatient)));
+            }
+        }
+
+    }
 }
 
 

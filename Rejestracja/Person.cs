@@ -8,35 +8,32 @@ using System.Windows;
 
 namespace Rejestracja
 {
-   public class Person  
+   public abstract class Person  
     {
         protected string _name;
         protected string _surname;
-        protected string _pesel;
-        private Gender _sex;
+
         public enum Gender { K, M, Empty };
         private DateTime _birthday;
-        private int _age;
-        private TextInfo _textinfo = CultureInfo.CurrentCulture.TextInfo;
+         private TextInfo _textinfo = CultureInfo.CurrentCulture.TextInfo;
         public string Name { get { return _textinfo.ToTitleCase(_name); } }
         public string Surname { get { return _textinfo.ToTitleCase(_surname); } }
-        public string Pesel { get { return _pesel; } }
-        public Gender Sex { get { return _sex; } }
-        private DateTime BirthDay { get { return _birthday; } }
-        public int Age { get { return _age; } }
+        public string Pesel { get;}
+        public Gender Sex { get;}
+        public int Age { get { return DateTime.Today.Year - _birthday.Year; } }
 
 
-        public  Person()
+        protected Person()
         {
             _name = string.Empty;
             _surname = string.Empty;
-            _pesel = string.Empty;
-            _sex = Gender.Empty;
+            Pesel = string.Empty;
+            Sex = Gender.Empty;
         }
 
 
-     
-        public Person(string imie, string nazwisko, string pesel) : this()
+
+        protected Person(string imie, string nazwisko, string pesel) : this()
         {
 
              if (SprawdzString(imie) == true && SprawdzString(nazwisko) == true)
@@ -47,31 +44,19 @@ namespace Rejestracja
              
             if (SprawdzPesel(pesel) == true)
             {
-                _pesel = pesel;
-                GetBirthDay(_pesel);
-                _sex = pesel[9] % 2 == 0 ? Gender.K : Gender.M;
-                _age = DateTime.Today.Year - BirthDay.Year;
+                Pesel = pesel;
+                GetBirthDay(Pesel);
+                Sex = pesel[9] % 2 == 0 ? Gender.K : Gender.M;
             }
         }
-    
+
+
+        public abstract bool Edit(string name, string surname);
+        
+        public abstract bool Remove();
+     
+        public abstract void UpdateAppointments();
       
-        protected void Edit(string name, string surname)
-        {
-            _name = name;
-            _surname = surname;
-        }
-        public virtual bool EditInDatabase(string name, string surname)
-        {
-            throw new Exception("Metoda nie została zdefiniowana");
-        }
-        public virtual bool Remove()
-        {
-            throw new Exception("Metoda nie została zdefiniowana");
-        }
-        public virtual void UpdateAppointments()
-        {
-            throw new Exception("Metoda nie została zdefiniowana");
-        }
 
         //lista termnów 
         //walidacja do poprawy 
@@ -149,11 +134,11 @@ namespace Rejestracja
             s_year += pesel[1];
             Year = int.Parse(s_year);
 
-            if (pesel[3] > 12 && pesel[3] < 0)
-                throw new Exception("Miesiąc musi być z zakresu 1-12");
+          //  if (pesel[3] > 12 || pesel[3] < 0)
+            //    throw new Exception("Miesiąc musi być z zakresu 1-12");
 
-            if (pesel[3] > 2)
-                Month = int.Parse(pesel[3].ToString());
+          if (pesel[3] > 2)
+            Month = int.Parse(pesel[3].ToString());
             else
             {
                 switch (pesel[3])
@@ -180,7 +165,7 @@ namespace Rejestracja
            
             Day = int.Parse(s_day);
 
-            if (Day > 31 && Day < 0)
+          /* if (Day > 31 && Day <= 0)
                 throw new Exception("Dzien musi być z zakresu 1-31");
 
             if (Month % 2 != 0)
@@ -189,7 +174,7 @@ namespace Rejestracja
             if (Month == 2)
                 if (Day > 29)
                     throw new Exception($"Luty ma mniej niż 30 dni {Day}/{Month}/{Year}");
-
+*/
             _birthday = new DateTime(Year, Month, Day);
 
         }

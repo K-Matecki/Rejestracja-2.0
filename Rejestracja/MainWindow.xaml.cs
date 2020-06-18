@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
-
+using System.ComponentModel;
 namespace Rejestracja
 {
     /// <summary>
@@ -23,7 +23,7 @@ namespace Rejestracja
     {
         public MainWindow()
         {
-            InitializeComponent();
+             InitializeComponent();
             var MenuPatients = new List<SubItem>();
             MenuPatients.Add(new SubItem("Dodaj pacjenta",1));
             MenuPatients.Add(new SubItem("Usuń pacjenta", 2));
@@ -73,8 +73,7 @@ namespace Rejestracja
                     break;
                 case 4:
                 case 8:
-               
-                    Main.Content = new PShowTable(Id);
+                     Main.Content = new PShowTable(Id);
                     break;
                     case 9:
                     Main.Content = new PAddAppointment();
@@ -90,9 +89,6 @@ namespace Rejestracja
            
         }
 
-     
-
-      
-       
-    }
+         
+     }
 }

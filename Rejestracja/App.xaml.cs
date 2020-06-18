@@ -13,5 +13,18 @@ namespace Rejestracja
     /// </summary>
     public partial class App : Application
     {
+        private void AppStartup(object sender, StartupEventArgs args)
+        {
+            DataBase.Connection.Open();
+            if (DataBase.Connection == null || DataBase.Connection.State != System.Data.ConnectionState.Open)
+            {
+                MessageBox.Show("Nieprawidłowe połączenie z baza");
+                Current.Shutdown();
+            }
+        }
+        private void AppExit(object sender, ExitEventArgs e) 
+        {
+            DataBase.Connection.Close();
+        }
     }
 }

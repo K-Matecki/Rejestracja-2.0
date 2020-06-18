@@ -20,6 +20,7 @@ namespace Rejestracja
         public Patient(string imie, string nazwisko, string pesel) : base(imie, nazwisko, pesel)
         {
             Add();
+            _idPatient = DataBase.GetIndex("patients");
         }
         public Patient(int id ,string imie, string nazwisko, string pesel) : base(imie, nazwisko, pesel)
         {
@@ -32,15 +33,16 @@ namespace Rejestracja
         //funkcja dodająca obiekt do bazy ustawia id obiektu zgodne z rekordem w bazie
         private void Add()
         {
-            _idPatient = DataBase.GetNextIndex("patients");
-           if(!DataBase.ModifyData($"INSERT INTO patients VALUES({_idPatient}, '{Name}', '{Surname}', '{Pesel}', {Age}, '{Sex}')"))
+           
+           if(!DataBase.ModifyData($"INSERT INTO patients(name, surname, pesel, age, sex) VALUES('{Name}', '{Surname}', '{Pesel}', {Age}, '{Sex}')"))
                 throw new Exception("Nieudane połączenie z baza {}");
            else
                 MessageBox.Show("Pomyślnie dodano osobę");
         }
-        public override bool EditInDatabase(string name, string surname)
+        public override bool Edit(string name, string surname)
         {
-            Edit(name,surname);
+            _name = name;
+            _surname = surname;
             return DataBase.ModifyData($"UPDATE patients SET name= '{Name}', surname ='{Surname}' where id_patient={IdPatient}");
             
         }
@@ -53,8 +55,8 @@ namespace Rejestracja
         }
         public override void  UpdateAppointments()
         {
-           
-            PatientAppointments = DataBase.UpdateAppointmentList(IdPatient);
+            PatientAppointments = DataBase.UpdateAppointmentList(IdPatient, "patients");
         }
     }
 }
+ 

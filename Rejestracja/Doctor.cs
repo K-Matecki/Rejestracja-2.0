@@ -19,6 +19,7 @@ namespace Rejestracja
         public Doctor(string imie, string nazwisko, string pesel) : base(imie, nazwisko, pesel)
         {
             Add();
+            _idDoctor = DataBase.GetIndex("doctors");
         }
         public Doctor(int id, string imie, string nazwisko, string pesel) : base(imie, nazwisko, pesel)
         {
@@ -31,15 +32,17 @@ namespace Rejestracja
         //funkcja dodająca obiekt do bazy ustawia id obiektu zgodne z rekordem w bazie
         private void Add()
         {
-            _idDoctor = DataBase.GetNextIndex("doctors");
-            if (!DataBase.ModifyData($"INSERT INTO doctors VALUES({_idDoctor}, '{Name}', '{Surname}', '{Pesel}', {Age}, '{Sex}')"))
+            
+            if (!DataBase.ModifyData($"INSERT INTO doctors(name, surname, pesel, age, sex) VALUES( '{Name}', '{Surname}', '{Pesel}', {Age}, '{Sex}')"))
                 throw new Exception("Nieudane połączenie z baza {}");
             else
                 MessageBox.Show("Pomyślnie dodano osobę");
         }
-        public override bool EditInDatabase(string name, string surname)
+        //funkcja aktualizująca rekord w bazie danych 
+        public override bool Edit(string name, string surname)
         {
-            Edit(name, surname);
+            _name = name;
+            _surname = surname;
             return DataBase.ModifyData($"UPDATE doctors SET name= '{Name}', surname ='{Surname}' where id_doctor={IdDoctor}");
         }
         public override bool Remove()
@@ -51,7 +54,7 @@ namespace Rejestracja
         }
         public override void UpdateAppointments()
         {
-            DoctorAppointment = DataBase.UpdateAppointmentList(IdDoctor);
+            DoctorAppointment = DataBase.UpdateAppointmentList(IdDoctor, "doctors");
         }
         
     }

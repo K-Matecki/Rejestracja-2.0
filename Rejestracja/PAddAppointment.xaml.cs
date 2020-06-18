@@ -27,16 +27,17 @@ namespace Rejestracja
             InitializeComponent();
             DatapickerAdd.BlackoutDates.AddDatesInPast();
             DatapickerAdd.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddDays(-1)));
-           
-            ComboBoxPatient.ItemsSource = DataBase.GetComboBoxList(2);
             
-            foreach (var item in DataBase.PersonList)
+            var ValuesPerson = DataBase.GetComboBoxListPerson(2);
+            ComboBoxPatient.ItemsSource = ValuesPerson.Item1;
+            
+            foreach (var item in ValuesPerson.Item2)
                 PatientList.Add((Patient)item);
 
+            ValuesPerson = DataBase.GetComboBoxListPerson(6);
+            ComboBoxDoctor.ItemsSource = ValuesPerson.Item1;
             
-            ComboBoxDoctor.ItemsSource = DataBase.GetComboBoxList(6);
-            
-            foreach (var item in DataBase.PersonList)
+            foreach (var item in ValuesPerson.Item2)
                 DoctorList.Add((Doctor)item);
 
         }
@@ -49,7 +50,7 @@ namespace Rejestracja
             Date += ClockAdd.Time.ToString().Remove(0,10);
             DateTime AppointmentDate =  Convert.ToDateTime(Date);
             Appointment NewAppointment;
-            NewAppointment = new Appointment(AppointmentDate, DoctorList[ComboBoxPatient.SelectedIndex], PatientList[ComboBoxPatient.SelectedIndex]);
+            NewAppointment = new Appointment(AppointmentDate, DoctorList[ComboBoxDoctor.SelectedIndex], PatientList[ComboBoxPatient.SelectedIndex]);
         }
         
     }

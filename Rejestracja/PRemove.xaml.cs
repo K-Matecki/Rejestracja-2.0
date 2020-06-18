@@ -20,40 +20,55 @@ namespace Rejestracja
     /// </summary>
     public partial class PRemove : Page
     {
-        
+        private List<Appointment> AppointmentList = new List<Appointment>();
+        private List<Person> PersonList = new List<Person>();
         private int Menu;
+        public delegate (List<string>, List<object>) MyDelegate(int  menu );
         public PRemove()
         {
             InitializeComponent();
           
         }
         public PRemove(int MenuID):this()
-        {
-            Menu = MenuID;
+        { 
+                   Menu = MenuID;
             UpdateComboBoxRemove();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
             switch (Menu)
             {
                 case 2:
                 case 6:
-                    if (DataBase.PersonList[ComboBoxRemove.SelectedIndex].Remove())
-                        MessageBox.Show($"Usunięto {DataBase.PersonList[ComboBoxRemove.SelectedIndex].Name}");
+                    if (PersonList[ComboBoxRemove.SelectedIndex].Remove())
+                        MessageBox.Show($"Usunięto {PersonList[ComboBoxRemove.SelectedIndex].Name}");
                     break;
                 case 10:
-                    if (DataBase.AppointmentList[ComboBoxRemove.SelectedIndex].Remove())
-                        MessageBox.Show($"Usunięto termin z dnia: {DataBase.AppointmentList[ComboBoxRemove.SelectedIndex].AppointmentDate.ToString()}");
+                    if (AppointmentList[ComboBoxRemove.SelectedIndex].Remove())
+                        MessageBox.Show($"Usunięto termin z dnia: {AppointmentList[ComboBoxRemove.SelectedIndex].AppointmentDate.ToString()}");
                     break;
             }
            
             UpdateComboBoxRemove();
+            
         }
         private void UpdateComboBoxRemove()
         {
-            
-            ComboBoxRemove.ItemsSource = DataBase.GetComboBoxList(Menu);
+            var ValuesAppointment = DataBase.GetComboBoxListAppointment(Menu);
+            var ValuesPerson = DataBase.GetComboBoxListPerson(Menu);
+            if (Menu == 10)
+            {
+                ComboBoxRemove.ItemsSource = ValuesAppointment.Item1;
+                AppointmentList = ValuesAppointment.Item2;
+            }
+            else 
+            {
+                ComboBoxRemove.ItemsSource = ValuesPerson.Item1;
+                PersonList = ValuesPerson.Item2;
+            }
+           
         }
     }
 }

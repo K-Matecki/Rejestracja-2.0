@@ -37,6 +37,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Caliburn.Micro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.Core.3.2.0\lib\net45\Caliburn.Micro.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Platform, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Platform.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.2.6.1513, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.2.6\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -76,6 +85,9 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -94,71 +106,81 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Appointment.cs" />
-    <Compile Include="Doctor.cs" />
-    <Compile Include="PAddAppointment.xaml.cs">
-      <DependentUpon>PAddAppointment.xaml</DependentUpon>
+    <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\Doctor.cs" />
+    <Compile Include="ViewModels\AddAppointmentViewModel.cs" />
+    <Compile Include="ViewModels\AddPersonViewModel.cs" />
+    <Compile Include="ViewModels\BaseAppointmentViewModel.cs" />
+    <Compile Include="ViewModels\BasePersonViewModel.cs" />
+    <Compile Include="ViewModels\EditAppointmentViewModel.cs" />
+    <Compile Include="ViewModels\EditPersonViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\RemoveViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase .cs" />
+    <Compile Include="Views\AddAppointmentView.xaml.cs">
+      <DependentUpon>AddAppointmentView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Patient.cs" />
-    <Compile Include="PEditAppointment.xaml.cs">
-      <DependentUpon>PEditAppointment.xaml</DependentUpon>
+    <Compile Include="Models\Patient.cs" />
+    <Compile Include="Views\EditAppointmentView.xaml.cs">
+      <DependentUpon>EditAppointmentView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PEditPerson.xaml.cs">
-      <DependentUpon>PEditPerson.xaml</DependentUpon>
+    <Compile Include="Views\EditPersonView.xaml.cs">
+      <DependentUpon>EditPersonView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ItemMenu.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="PRemove.xaml.cs">
-      <DependentUpon>PRemove.xaml</DependentUpon>
+    <Compile Include="ViewModels\ItemMenu.cs" />
+    <Compile Include="Models\Person.cs" />
+    <Compile Include="Views\RemoveView.xaml.cs">
+      <DependentUpon>RemoveView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PShowTable.xaml.cs">
-      <DependentUpon>PShowTable.xaml</DependentUpon>
+    <Compile Include="Views\ShowTableView.xaml.cs">
+      <DependentUpon>ShowTableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SubItem.cs" />
-    <Compile Include="UserControlMenuItem.xaml.cs">
-      <DependentUpon>UserControlMenuItem.xaml</DependentUpon>
+    <Compile Include="ViewModels\SubItem.cs" />
+    <Compile Include="Views\UserControlMenuItemView.xaml.cs">
+      <DependentUpon>UserControlMenuItemView.xaml</DependentUpon>
     </Compile>
-    <Page Include="PAddAppointment.xaml">
+    <Page Include="Views\AddAppointmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PAddPerson.xaml">
+    <Page Include="Views\AddPersonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PEditAppointment.xaml">
+    <Page Include="Views\EditAppointmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PEditPerson.xaml">
+    <Page Include="Views\EditPersonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="PAddPerson.xaml.cs">
-      <DependentUpon>PAddPerson.xaml</DependentUpon>
+    <Compile Include="Views\AddPersonView.xaml.cs">
+      <DependentUpon>AddPersonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataBase.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Models\DataBase.cs" />
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PRemove.xaml">
+    <Page Include="Views\RemoveView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PShowTable.xaml">
+    <Page Include="Views\ShowTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControlMenuItem.xaml">
+    <Page Include="Views\UserControlMenuItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

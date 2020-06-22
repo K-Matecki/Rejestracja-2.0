@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\App.xaml
-8-627082450
+8199598447
 
-20136342283
-129-481229146
-PAddAppointment.xaml;PAddPerson.xaml;PEditAppointment.xaml;PEditPerson.xaml;MainWindow.xaml;PRemove.xaml;PShowTable.xaml;UserControlMenuItem.xaml;
+30-225618448
+1331822053464
+Views\AddAppointmentView.xaml;Views\AddPersonView.xaml;Views\EditAppointmentView.xaml;Views\EditPersonView.xaml;Views\MainView.xaml;Views\RemoveView.xaml;Views\ShowTableView.xaml;Views\UserControlMenuItemView.xaml;
 
 True
 

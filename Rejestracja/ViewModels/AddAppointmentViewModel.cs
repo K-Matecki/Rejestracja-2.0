@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using GalaSoft.MvvmLight.Messaging;
 using Rejestracja.Models;
+using System.Collections.Generic;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Messaging;
 
 namespace Rejestracja.ViewModels
 {
@@ -11,16 +11,16 @@ namespace Rejestracja.ViewModels
         private List<Patient> PatientList = new List<Patient>();
         public List<string> ComboBoxPatient { get; private set; }
         public List<string> ComboBoxDoctor { get; private set; }
-        public int IndexDoctor { get; set ; } 
+        public int IndexDoctor { get; set; }
         public int IndexPatient { get; set; }
         private Appointment NewAppointment;
         public ICommand AddAppointmentCommand { get; }
 
-        public AddAppointmentViewModel( ):base()
+        public AddAppointmentViewModel() : base()
         {
             var ValuesPerson = DataBase.GetComboBoxListPerson(2);
-            ComboBoxPatient= ValuesPerson.Item1;
-            
+            ComboBoxPatient = ValuesPerson.Item1;
+
             foreach (var item in ValuesPerson.Item2)
                 PatientList.Add((Patient)item);
 
@@ -38,15 +38,15 @@ namespace Rejestracja.ViewModels
         private void Add()
         {
             NewAppointment = new Appointment(DateToAdd, DoctorList[IndexDoctor], PatientList[IndexPatient]);
-            Messenger.Default.Send<MyMessage>(new MyMessage { MessageText = "Pomyślnie dodano termin" }); 
+            Messenger.Default.Send<MyMessage>(new MyMessage { MessageText = "Pomyślnie dodano termin" });
         }
         private bool CanAddAppointment()
         {
             if (IndexDoctor == -1 || IndexPatient == -1)
                 return false;
-            return IndexDoctor  <=  DoctorList.Count - 1 && IndexPatient <= PatientList.Count - 1;
+            return IndexDoctor <= DoctorList.Count - 1 && IndexPatient <= PatientList.Count - 1;
         }
-    
+
 
     }
 }

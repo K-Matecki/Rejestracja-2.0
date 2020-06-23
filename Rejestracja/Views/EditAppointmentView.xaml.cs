@@ -16,17 +16,13 @@ namespace Rejestracja.Views
     /// </summary>
     public partial class EditAppointmentView : Page  
     {
-        static bool isRegistered = false;
+      
         public EditAppointmentView(int MenuId) 
         {
             InitializeComponent();
             //IEventAggregator events = new EventAggregator();
             this.DataContext = new EditAppointmentViewModel(MenuId);
-            if (!isRegistered)
-            {
-                //Messenger.Default.Register<MyMessage>(this.DataContext, MyMessage.ProcessMessage);
-                isRegistered = true;
-            }
+           
         }
         
     }

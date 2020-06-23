@@ -33,7 +33,7 @@
             </ScrollViewer>
         </Grid>
         <Grid HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="1">
-            <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="Main"   NavigationUIVisibility="Hidden"/>
         </Grid>
     </Grid>
 </Window>

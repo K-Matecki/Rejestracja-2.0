@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 namespace Rejestracja.ViewModels
 {
@@ -12,7 +8,7 @@ namespace Rejestracja.ViewModels
         private readonly Action execute;
 
 
-        public RelayCommand(Action execute):this(execute,null)
+        public RelayCommand(Action execute) : this(execute, null)
         { }
         public RelayCommand(Action execute, Func<bool> canExecute)
         {
@@ -21,7 +17,8 @@ namespace Rejestracja.ViewModels
             this.execute = execute;
             this.canExecute = canExecute;
         }
-        public event EventHandler CanExecuteChanged {
+        public event EventHandler CanExecuteChanged
+        {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }

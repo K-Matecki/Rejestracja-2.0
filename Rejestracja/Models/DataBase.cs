@@ -196,7 +196,7 @@ namespace Rejestracja.Models
             List<Appointment> AppointmentList = new List<Appointment>();
             List<string> DataStringList = new List<string>();
 
-            //rozdzielenie na pacjenta i lekarza 
+            
             string IdName = "id_";
             switch (TableName)
             {
@@ -206,13 +206,10 @@ namespace Rejestracja.Models
                 case "patients":
                     IdName += "patient";
                     break;
-                 
-
+      
             }
             DataStringList = GetData($"SELECT * FROM appointments where {IdName}= '{PersonID}' ", "appointments");
-            if (DataStringList.Count == 0)
-                MessageBox.Show("Ten osoba nie ma terminów");
-            else
+            if (DataStringList.Count != 0)
                 AppointmentList= GetAppointmentList(DataStringList);
             
             return AppointmentList;
@@ -221,14 +218,14 @@ namespace Rejestracja.Models
 
 
     
-
+        //Do naprawy
         private static List<Appointment> GetAppointmentList(List<string>  DataStringList)
         {
             List<Appointment> AppointmentList = new List<Appointment>();
             List<string> StringDataDoctor, StringDataPatient;
             string[] LineDoctor, LinePatient;
             string[] LineAppointment;
-            // nie działa dla person 
+            
             foreach (var item in DataStringList)
             {
                 LineAppointment = item.Split(',');

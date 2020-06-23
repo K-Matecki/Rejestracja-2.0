@@ -57,7 +57,7 @@ namespace Rejestracja.Views
                     break;
                 case 4:
                 case 8:
-                     Main.Content = new ShowTableView(Id);
+                     Main.Content = new ShowPersonTableView(Id);
                     break;
                     case 9:
                     Main.Content = new AddAppointmentView();
@@ -66,7 +66,7 @@ namespace Rejestracja.Views
                     Main.Content = new EditAppointmentView(Id);
                     break;
                 case 12:
-                   // Main.Content
+                    Main.Content = new ShowAppointmentView(Id);
                     break;
                
             }

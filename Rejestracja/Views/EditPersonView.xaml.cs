@@ -21,16 +21,10 @@ namespace Rejestracja.Views
     /// </summary>
     public partial class EditPersonView : Page
     {
-        static bool isRegistered = false;
         public EditPersonView(int MenuID)  
         {
             InitializeComponent();
             this.DataContext = new EditPersonViewModel(MenuID);
-            if (!isRegistered)
-            {   
-                //Messenger.Default.Register<MyMessage>(this.DataContext, MyMessage.ProcessMessage);
-                isRegistered = true;
-            }
         }
 
         

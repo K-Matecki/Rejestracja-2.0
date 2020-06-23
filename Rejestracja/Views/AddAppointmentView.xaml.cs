@@ -22,7 +22,7 @@ namespace Rejestracja.Views
     /// </summary>
     public partial class AddAppointmentView : Page
     {
-        static bool isRegistered = false;
+       
         public AddAppointmentView()
         {
             InitializeComponent();
@@ -30,11 +30,6 @@ namespace Rejestracja.Views
             DatapickerAdd.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddDays(-1)));
       
             this.DataContext = new AddAppointmentViewModel();
-            if (!isRegistered)
-            {
-               // Messenger.Default.Register<MyMessage>(this.DataContext, MyMessage.ProcessMessage);
-                isRegistered = true;
-            }
         }
 
          

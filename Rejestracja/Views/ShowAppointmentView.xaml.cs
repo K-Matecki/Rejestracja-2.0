@@ -12,22 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GalaSoft.MvvmLight.Messaging;
 using Rejestracja.ViewModels;
 namespace Rejestracja.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy ShowPersonTable.xaml
+    /// Logika interakcji dla klasy ShowAppointmentView.xaml
     /// </summary>
-    public partial class ShowPersonTableView : Page
+    public partial class ShowAppointmentView : Page
     {
-         
-        public ShowPersonTableView(int MenuId) 
-         {
+       
+        public ShowAppointmentView(int MenuId)
+        {
             InitializeComponent();
-            this.DataContext=new ShowPersonTableViewModel(MenuId);
-           
+            this.DataContext = new ShowAppointmentViewModel(MenuId);
+
         }
-   
     }
 }

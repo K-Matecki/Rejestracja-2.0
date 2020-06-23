@@ -1,10 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using MaterialDesignThemes.Wpf;
 
 namespace Rejestracja.ViewModels
 
@@ -13,16 +8,16 @@ namespace Rejestracja.ViewModels
     {
         public string Header { get; private set; }
         public List<SubItem> SubItems { get; private set; }
-       public PackIconKind Icon { get;  set; }
- 
+        public PackIconKind Icon { get; set; }
 
-        public ItemMenu(string header, List<SubItem> subItems ,PackIconKind icon)
+
+        public ItemMenu(string header, List<SubItem> subItems, PackIconKind icon)
         {
             Header = header;
             SubItems = subItems;
             Icon = icon;
 
         }
-      
+
     }
 }

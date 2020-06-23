@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+﻿using GalaSoft.MvvmLight.Messaging;
 using Rejestracja.Models;
+using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace Rejestracja.ViewModels
 {
@@ -14,22 +10,9 @@ namespace Rejestracja.ViewModels
         public int Index { get; set; }
         private int Menu;
         private List<Person> PersonList = new List<Person>();
-        public List<string> _comboBoxPerson;
-        public List<string> ComboBoxPerson
-        {
-            get
-            {
-                return _comboBoxPerson;
-            }
-            private set
-            {
-                _comboBoxPerson = value;
-                OnPropertyChanged();
-            }
-        }
         public ICommand EditPersonCommand { get; }
         public ICommand SelectionChangedCommand { get; }
-        public EditPersonViewModel(int MenuID):base()
+        public EditPersonViewModel(int MenuID) : base()
         {
             Menu = MenuID;
             Update();
@@ -37,14 +20,27 @@ namespace Rejestracja.ViewModels
             SelectionChangedCommand = new RelayCommand(Change);
             Index = -1;
         }
+        public List<string> ComboBoxPerson
+        {
+            get
+            {
+                return _comboBoxPerson;
+            }
+            protected set
+            {
+                _comboBoxPerson = value;
+                OnPropertyChanged();
+            }
+        }
 
         private void Edit()
         {
-            
+            string TextMessage = "";
             if (PersonList[Index].Edit(Name, Surname))
-                MessageBox.Show("Pomyślna Edycja");
+                TextMessage = "Pomyślna Edycja";
             else
-                MessageBox.Show("Nieudana edycja");
+                TextMessage = "Nieudana edycja";
+            Messenger.Default.Send<MyMessage>(new MyMessage { MessageText = TextMessage });
             Update();
         }
 
@@ -59,9 +55,10 @@ namespace Rejestracja.ViewModels
             ComboBoxPerson = ValuesPerson.Item1;
             PersonList = ValuesPerson.Item2;
         }
-        private void Change() {
-            Name =  PersonList[Index].Name;
-            Surname =  PersonList[Index].Surname;
+        private void Change()
+        {
+            Name = PersonList[Index].Name;
+            Surname = PersonList[Index].Surname;
         }
     }
 }

@@ -1,18 +1,12 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MaterialDesignThemes.Wpf;
-using System.ComponentModel;
-using Rejestracja.Models;
 namespace Rejestracja.ViewModels
 {
-    class MainWindowViewModel  
+    class MainWindowViewModel
     {
-        public List<ItemMenu> ItemMenuList= new List<ItemMenu>();
+        public List<ItemMenu> ItemMenuList = new List<ItemMenu>();
 
-        public MainWindowViewModel() 
+        public MainWindowViewModel()
         {
             var MenuPatients = new List<SubItem>();
             MenuPatients.Add(new SubItem("Dodaj pacjenta", 1));
@@ -37,6 +31,6 @@ namespace Rejestracja.ViewModels
             ItemMenuList.Add(new ItemMenu("Termin", MenuApointments, PackIconKind.UserClock));
 
         }
-         
+
     }
 }

@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
 namespace Rejestracja.ViewModels
 {
-    public abstract class BasePersonViewModel : ViewModelBase , IDataErrorInfo
-    {   
-        public string Error { get { return null;} }
-         
-        
+    public abstract class BasePersonViewModel : ViewModelBase, IDataErrorInfo
+    {
+        public string Error { get { return null; } }
+
+
+
+        public List<string> _comboBoxPerson;
         private string _name;
         private string _surname;
         private string _pesel;
 
-        public string Name {
+        public string Name
+        {
             get { return _name; }
-            set { _name = value; OnPropertyChanged();}
+            set { _name = value; OnPropertyChanged(); }
         }
-       
+
         public string Surname
         {
             get { return _surname; }
@@ -34,13 +32,9 @@ namespace Rejestracja.ViewModels
             set { _pesel = value; OnPropertyChanged(); }
         }
 
-     
         private bool[] ValidateResult = new bool[3];
         protected bool IsValidateEdit { get { return ValidateResult[0] && ValidateResult[1]; } }
         protected bool IsValidateAdd { get { return ValidateResult[0] && ValidateResult[1] && ValidateResult[2]; } }
-
-
-
 
         public BasePersonViewModel()
         {
@@ -54,7 +48,7 @@ namespace Rejestracja.ViewModels
             get
             {
                 string result = null;
-                
+
                 switch (PropertyName)
                 {
                     case "Name":
@@ -64,11 +58,11 @@ namespace Rejestracja.ViewModels
                             result = "Imię zawiera niedozwolone znaki.";
                         else if (Name.Length < 3 || Name.Length > 51)
                             result = "Imię musi mieć długość od 3 do 51 znaków.";
-                        
-                            ValidateResult[0] = result == null ? true : false;
+
+                        ValidateResult[0] = result == null ? true : false;
 
                         break;
-                    
+
                     case "Surname":
                         if (string.IsNullOrEmpty(Surname))
                             result = "Uzupełnij pole Nazwisko";
@@ -81,21 +75,22 @@ namespace Rejestracja.ViewModels
                         break;
 
                     case "Pesel":
-                         if (string.IsNullOrEmpty(Pesel))
+                        if (string.IsNullOrEmpty(Pesel))
                             result = "Uzupełnij pole Pesel";
-                         else if(Pesel.Length != 11)
+                        else if (Pesel.Length != 11)
                             result = "Pesel musi mieć długość 11 znaków.";
-                        else if(CheckPesel(Pesel)==false)
+                        else if (CheckPesel(Pesel) == false)
                             result = "Nieprawidłowy Pesel";
                         ValidateResult[2] = result == null ? true : false;
-                      break;
+                        //Unique check
+                        break;
                 }
                 return result;
             }
 
         }
 
-        private static bool CheckString(string input)
+        private bool CheckString(string input)
         {
             return Regex.IsMatch(input, @"^[a-zA-Z]+$");
         }
@@ -114,6 +109,11 @@ namespace Rejestracja.ViewModels
             for (int i = 0; i < pesel.Length; i++)
                 ControlSum += ControlNumber[i] * (int)pesel[i];
             return ControlSum % 10 == 0 ? true : false;
+        }
+
+        private bool CheckPeselUnique()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

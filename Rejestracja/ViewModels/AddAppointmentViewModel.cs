@@ -16,8 +16,8 @@ namespace Rejestracja.ViewModels
         private List<Patient> PatientList = new List<Patient>();
         public List<string> ComboBoxPatient { get; private set; }
         public List<string> ComboBoxDoctor { get; private set; }
-        public int IndexDoctor { get; set ; } // <  OnPropertyChanged();
-        public int IndexPatient { get; set; } // <  OnPropertyChanged();
+        public int IndexDoctor { get; set ; } 
+        public int IndexPatient { get; set; }
         private Appointment NewAppointment;
         public ICommand AddAppointmentCommand { get; }
 
@@ -36,11 +36,14 @@ namespace Rejestracja.ViewModels
                 DoctorList.Add((Doctor)item);
 
             AddAppointmentCommand = new RelayCommand(Add, CanAddAppointment);
+
+            IndexDoctor = -1;
+            IndexPatient = -1;
         }
         private void Add()
         {
             NewAppointment = new Appointment(DateToAdd, DoctorList[IndexDoctor], PatientList[IndexPatient]);
-            MessageBox.Show("Pomyślnie dodano termin");
+           // MessageBox.Show("Pomyślnie dodano termin");
         }
         private bool CanAddAppointment()
         {

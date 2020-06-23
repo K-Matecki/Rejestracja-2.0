@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Rejestracja"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EditPerson">
@@ -11,11 +12,17 @@
     <Grid>
         <Grid HorizontalAlignment="Left" Height="419" Margin="-93,-55,0,0" VerticalAlignment="Top" Width="802">
             <Label Content="Wybierz OSOBE" HorizontalAlignment="Left" Margin="342,152,0,0" VerticalAlignment="Top"/>
-            <ComboBox  Name="ComboBoxEdit" ItemsSource="{Binding ComboBoxPerson}" SelectedIndex="{Binding Index}"  HorizontalAlignment="Left" Margin="243,181,0,0" VerticalAlignment="Top" Width="310" />
+            <ComboBox  Name="ComboBoxEdit" ItemsSource="{Binding ComboBoxPerson}" SelectedIndex="{Binding Index}"  HorizontalAlignment="Left" Margin="243,181,0,0" VerticalAlignment="Top" Width="310" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            </ComboBox>
             <Label Content="Imie:"  HorizontalAlignment="Left" Margin="291,224,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.25,0.671"/>
-            <TextBox Name="SurnameText" Text="{Binding Surname}" HorizontalAlignment="Left" Height="23" Margin="331,266,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="SurnameText" Text="{Binding Surname,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="331,266,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
             <Label Content="Nazwisko:" HorizontalAlignment="Left" Margin="268,263,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.25,0.671"/>
-            <TextBox Name="NameText" Text="{Binding Name}" HorizontalAlignment="Left" Height="23" Margin="331,224,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.145,0.64"/>
+            <TextBox Name="NameText" Text="{Binding Name,ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="331,224,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.145,0.64"/>
             <Label Content="Edytuj OSOBE" HorizontalAlignment="Left" Margin="342,106,0,0" VerticalAlignment="Top"/>
             <Button Content="Wprowadz zmiany" Command="{Binding EditPersonCommand}" HorizontalAlignment="Left" Margin="301,323,0,0" VerticalAlignment="Top" Width="150" />
         </Grid>

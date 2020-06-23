@@ -17,7 +17,7 @@ namespace Rejestracja.Models
         {
             IdPatient = GetHashCode();
         }
-        public Patient(string name, string surname, string pesel) : base(name, surname, pesel)
+        public Patient(string name, string surname, string pesel ) : base(name, surname, pesel )
         {
             Add();
             IdPatient = DataBase.GetIndex("patients");

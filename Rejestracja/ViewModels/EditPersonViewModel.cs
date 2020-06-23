@@ -28,13 +28,14 @@ namespace Rejestracja.ViewModels
             }
         }
         public ICommand EditPersonCommand { get; }
-
-        public EditPersonViewModel(int MenuID)
+        public ICommand SelectionChangedCommand { get; }
+        public EditPersonViewModel(int MenuID):base()
         {
             Menu = MenuID;
             Update();
             EditPersonCommand = new RelayCommand(Edit, CanEditPerson);
-            
+            SelectionChangedCommand = new RelayCommand(Change);
+            Index = -1;
         }
 
         private void Edit()
@@ -49,7 +50,7 @@ namespace Rejestracja.ViewModels
 
         private bool CanEditPerson()
         {
-            return Index > -1 && Index <= PersonList.Count && IsValidate;
+            return Index > -1 && Index <= PersonList.Count && IsValidateEdit;
         }
 
         private void Update()
@@ -58,10 +59,12 @@ namespace Rejestracja.ViewModels
             ComboBoxPerson = ValuesPerson.Item1;
             PersonList = ValuesPerson.Item2;
         }
-
+        private void Change() {
+            Name =  PersonList[Index].Name;
+            Surname =  PersonList[Index].Surname;
+            Pesel = PersonList[Index].Pesel;
+        }
     }
 }
 
-//Dodaj 
-//NameText.Text =  PersonList[ComboBoxEdit.SelectedIndex].Name;
-//SurnameText.Text =  PersonList[ComboBoxEdit.SelectedIndex].Surname;
+

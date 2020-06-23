@@ -29,25 +29,19 @@ namespace Rejestracja.Models
             _surname = string.Empty;
             Pesel = string.Empty;
             Sex = Gender.Empty;
+             
         }
 
 
 
         protected Person(string name, string surname, string pesel) : this()
-        {
-
-             if (SprawdzString(name) == true && SprawdzString(surname) == true)
-             {
-              _name = name;
+        {   
+            _name = name;
             _surname = surname;
-             }
-             
-            if (SprawdzPesel(pesel) == true)
-            {
-                Pesel = pesel;
-                GetBirthDay(Pesel);
-                Sex = pesel[9] % 2 == 0 ? Gender.K : Gender.M;
-            }
+            Pesel = pesel;
+            _birthday = GetBirthDay(pesel);
+            Sex = pesel[9] % 2 == 0 ? Gender.K : Gender.M;
+            
         }
 
 
@@ -56,129 +50,70 @@ namespace Rejestracja.Models
         public abstract bool Remove();
      
         public abstract void UpdateAppointments();
-      
 
-        //lista termnów 
-        //walidacja do poprawy 
-        private bool SprawdzPesel(string Pesel)
-        {
-            if (Pesel.Length != 11) {
-                MessageBox.Show("Pesel musi mieć długość 11 znaków");
-                return false; 
-            }
-            foreach (char c in Pesel)
-            {
-                if (!char.IsDigit(c))
-                {
-                    MessageBox.Show("Pesel musi zawierać same cyfr");
-                    return false;
-                }
-               
-            }
-            return true;
-        }
 
-      
-        protected string WprowadzString(string Tekst)
+        private  DateTime GetBirthDay(string pesel)
         {
-            string zmienna;
-            do
-            {
-                Console.Write($"Wprowadz {Tekst}:");
-                zmienna = Console.ReadLine();
-            } while (string.IsNullOrEmpty(zmienna));
-
-            return zmienna;
-        }
-        private bool SprawdzString(string Zmienna)
-        {
-            foreach (char c in Zmienna)
-            {
-                if (!char.IsLetter(c))
-                    throw new Exception($"Musisz wprowadzic same litery");
-            }
-            return true;
-        }
-        //funkcja przypisująca wiek na podstawie podanego peselu 
-        protected void GetBirthDay(string pesel)
-        {
-            int Year = 0, Month = 0, Day = 0;
-            string s_year = string.Empty;
-            string s_day = string.Empty;
+            
+            string date;
             switch (pesel[2])
             {
                 case '0':
                 case '1':
-                    s_year = "19";
+                    date = "19";
                     break;
                 case '2':
                 case '3':
-                    s_year = "20";
+                    date = "20";
                     break;
                 case '4':
                 case '5':
-                    s_year = "21";
+                    date = "21";
                     break;
                 case '6':
                 case '7':
-                    s_year = "22";
+                    date = "22";
                     break;
                 case '8':
                 case '9':
-                    s_year = "18";
+                    date = "18";
                     break;
                 default:
-                    throw new Exception("osoba już lub jeszcze nie żyje urodzona po za przedziałem 1800-2299");
+                    date = "XX";
+                    break;
             }
-            s_year += pesel[0];
-            s_year += pesel[1];
-            Year = int.Parse(s_year);
+            date += $"{pesel[0]}{pesel[1]}-";
 
-          //  if (pesel[3] > 12 || pesel[3] < 0)
-            //    throw new Exception("Miesiąc musi być z zakresu 1-12");
 
-          if (pesel[3] > 2)
-            Month = int.Parse(pesel[3].ToString());
+            if (int.Parse(pesel[3].ToString()) >= 3)
+                date += $"0{pesel[3]}";
             else
             {
                 switch (pesel[3])
                 {
                     case '0':
-                        Month = 10;
+                        date += "10";
                         break;
                     case '1':
                         if (pesel[2] % 2 == 0)
-                            Month = 1;
+                            date += $"0{pesel[3]}";
                         else
-                            Month = 11;
+                            date += "11";
                         break;
                     case '2':
                         if (pesel[2] % 2 == 0)
-                            Month = 2;
+                            date += $"0{pesel[3]}";
                         else
-                            Month = 12;
+                            date += "12";
                         break;
                 }
             }
-            s_day += pesel[4];
-            s_day += pesel[5];
-           
-            Day = int.Parse(s_day);
+            date += $"-{pesel[4]}{pesel[5]}";
 
-          /* if (Day > 31 && Day <= 0)
-                throw new Exception("Dzien musi być z zakresu 1-31");
-
-            if (Month % 2 != 0)
-                if (Day == 31)
-                    throw new Exception("Ten miesiąc ma mniej niż 31 dni");
-            if (Month == 2)
-                if (Day > 29)
-                    throw new Exception($"Luty ma mniej niż 30 dni {Day}/{Month}/{Year}");
-*/
-            _birthday = new DateTime(Year, Month, Day);
-
+            if (!DateTime.TryParse(date, out _birthday))
+                throw new ArgumentException("Nieprawidołowa data urodzenia");
+            
+            return _birthday;
         }
-
-     
     }
 }

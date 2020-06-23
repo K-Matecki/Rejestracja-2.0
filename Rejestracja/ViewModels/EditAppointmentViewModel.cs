@@ -10,9 +10,10 @@ namespace Rejestracja.ViewModels
     {
         // private readonly IEventAggregator _aggregator;
         // private string _text;
-        int menu;
+        private int menu;
         public int Index { get; set; }
         private List<Appointment> AppointmentList = new List<Appointment>();
+        
         public List<string> _comboBoxAppointment;
         public List<string> ComboBoxAppointment {
             get { 
@@ -42,12 +43,13 @@ namespace Rejestracja.ViewModels
             menu = MenuId;
             Update();
             EditCommand = new RelayCommand(Edit, CanEditAppointment);
+            Index = -1;
             //_aggregator = aggregator;
-          // _aggregator.Subscribe(this);
-            /* dodać 
-            DatapickerEdit.BlackoutDates.AddDatesInPast();
-            DatapickerEdit.BlackoutDates.Add(new System.Windows.Controls.CalendarDateRange(DateTime.Now.AddDays(-1)));
-            */
+            // _aggregator.Subscribe(this);
+            
+          // BlackoutDates.AddDatesInPast();
+           //BlackoutDates.Add(new System.Windows.Controls.CalendarDateRange(DateTime.Now.AddDays(-1)));
+           
         }
         private bool CanEditAppointment()
         {

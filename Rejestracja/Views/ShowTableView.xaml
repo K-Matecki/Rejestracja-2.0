@@ -4,31 +4,40 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Rejestracja"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ShowTable">
-
-    <Grid>
+    
+        <Grid>
+        
         <Grid HorizontalAlignment="Left" Height="419" Margin="-2,10,0,0" VerticalAlignment="Top" Width="802">
-            <Label Content="Wybierz  " HorizontalAlignment="Left" Margin="267,85,0,0" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="230"/>
-            <DataGrid Name="AppointmentsTableDoctor" AutoGenerateColumns="False" Margin="135,290,285,43" IsReadOnly="True" CanUserAddRows="False">
+            
+            <Label Content="Wybierz" HorizontalAlignment="Left" Margin="267,85,0,0" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="230"/>
+            <DataGrid Name="AppointmentsTableDoctor" ItemsSource="{Binding AppointmentList}" Visibility="{Binding ShouldBeVisible[0],Converter={StaticResource booleanToVisibilityConverter}}" AutoGenerateColumns="True" Margin="135,290,285,43" IsReadOnly="True" CanUserAddRows="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Termin" Binding="{Binding  AppointmentDate}" />
-                    <DataGridTextColumn Header="Imie Pacjenta" Binding="{Binding  Patient.Name}" />
+                    <DataGridTextColumn Header="Termin" Binding="{Binding   AppointmentDate}" />
+                    <DataGridTextColumn Header="Imie Pacjenta" Binding="{Binding   Patient.Name}" />
                     <DataGridTextColumn Header="Nazwisko Pacjenta" Binding="{Binding  Patient.Surname}" />
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid Name="AppointmentsTablePatient" AutoGenerateColumns="True" Margin="135,290,285,43" IsReadOnly="True" CanUserAddRows="False">
+            <DataGrid Name="AppointmentsTablePatient" ItemsSource="{Binding AppointmentList}"  Visibility="{Binding ShouldBeVisible[1],Converter={StaticResource booleanToVisibilityConverter}}" AutoGenerateColumns="True" Margin="135,290,285,43" IsReadOnly="True" CanUserAddRows="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Termin" Binding="{Binding AppointmentDate}" />
-                    <DataGridTextColumn Header="Imię lekarza" Binding="{Binding Doctor.Name}" />
-                    <DataGridTextColumn Header="Nazwisko lekarza" Binding="{Binding Doctor.Surname}" />
+                    <DataGridTextColumn Header="Termin" Binding="{Binding  AppointmentDate}" />
+                    <DataGridTextColumn Header="Imię lekarza" Binding="{Binding  Doctor.Name}" />
+                    <DataGridTextColumn Header="Nazwisko lekarza" Binding="{Binding   Doctor.Surname}" />
                 </DataGrid.Columns>
             </DataGrid>
-            <ComboBox Name="ComboBoxShow" HorizontalAlignment="Left" Margin="135,132,0,0" VerticalAlignment="Top" Width="382" SelectionChanged="ComboBox_SelectionChanged"/>
-            <DataGrid Name="PersonTable" AutoGenerateColumns="True" Margin="135,180,285,153" IsReadOnly="True" CanUserAddRows="False">
+            <ComboBox Name="ComboBoxShow" ItemsSource="{Binding ComboBoxPerson}" SelectedIndex="{Binding Index,Mode=TwoWay}" HorizontalAlignment="Left" Margin="135,132,0,0" VerticalAlignment="Top" Width="382">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+            <DataGrid Name="PersonTable" ItemsSource="{Binding ShowList}" AutoGenerateColumns="False" Margin="135,180,285,153" IsReadOnly="True" CanUserAddRows="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Imie" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Imie" Binding="{Binding  Name}" />
                     <DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" />
                     <DataGridTextColumn Header="Pesel" Binding="{Binding Pesel}" />
                     <DataGridTextColumn Header="Wiek" Binding="{Binding Age}" />

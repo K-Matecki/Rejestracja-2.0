@@ -13,7 +13,7 @@
         <Grid HorizontalAlignment="Left" Height="460" Margin="10,-10,0,0" VerticalAlignment="Top" Width="790">
             <Button Content="Edytuj wizyte" Command="{Binding EditAppointmentCommand}" HorizontalAlignment="Left" Margin="400,335,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="0.464,-1"  />
             <materialDesign:Clock Name="ClockEdit" Time="{Binding Time}"  HorizontalAlignment="Left" Margin="0,0,0,-20" VerticalAlignment="Top" Height="480" Width="286" AutomationProperties.IsRequiredForForm="True" Is24Hours="True" IsPostMeridiem="True" />
-            <DatePicker x:Name="DatapickerEdit" SelectedDate="{Binding Date }" HorizontalAlignment="Left" Margin="355,270,0,0" VerticalAlignment="Top" Height="29" Width="190" IsTodayHighlighted="True" />
+            <DatePicker x:Name="DatapickerEdit"  SelectedDate="{Binding Date }" HorizontalAlignment="Left" Margin="355,270,0,0" VerticalAlignment="Top" Height="29" Width="190" IsTodayHighlighted="True" />
             <ComboBox  Name="ComboBoxEditA" ItemsSource="{Binding ComboBoxAppointment}" SelectedIndex="{Binding Index}" HorizontalAlignment="Left" Margin="291,185,0,0" VerticalAlignment="Top" Width="310" />
             <Label Content="Wybierz:" HorizontalAlignment="Left" Margin="400,162,0,0" VerticalAlignment="Top" Height="38" Width="95" RenderTransformOrigin="0.105,0.711"/>
             <Label Content="Data:" HorizontalAlignment="Left" Margin="305,282,0,0" VerticalAlignment="Top" Height="38" Width="95" RenderTransformOrigin="0.105,0.711"/>

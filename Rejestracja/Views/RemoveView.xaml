@@ -11,8 +11,8 @@
     <Grid>
         <Grid HorizontalAlignment="Left" Height="419" Margin="-86,0,0,0" VerticalAlignment="Top" Width="802">
             <Label Content="Wybierz osobe:" HorizontalAlignment="Left" Margin="362,160,0,0" VerticalAlignment="Top"/>
-            <ComboBox Name="ComboBoxRemove" HorizontalAlignment="Left" Margin="101,197,0,0" VerticalAlignment="Top" Width="560" />
-            <Button Content="Usuń" HorizontalAlignment="Left" Margin="326,278,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click"/>
+            <ComboBox Name="ComboBoxRemove" ItemsSource="{Binding ComboBoxRemove}" SelectedIndex="{Binding Index}" HorizontalAlignment="Left" Margin="101,197,0,0" VerticalAlignment="Top" Width="560" />
+            <Button Content="Usuń" Command="{Binding RemoveComand}" HorizontalAlignment="Left" Margin="326,278,0,0" VerticalAlignment="Top" Width="150"  />
             <Label Content="Usuń osobe " HorizontalAlignment="Left" Margin="362,100,0,0" VerticalAlignment="Top" Height="40" Width="86"/>
         </Grid>
     </Grid>

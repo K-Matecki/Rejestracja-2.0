@@ -34,6 +34,7 @@ namespace Rejestracja.ViewModels
             Menu = MenuID;
             Update();
             RemoveComand= new RelayCommand(Remove, CanRemove);
+            Index = -1;
         }
         private void Update() 
         {
@@ -74,6 +75,6 @@ namespace Rejestracja.ViewModels
             return Index > -1 && Menu ==10? Index <= AppointmentList.Count : Index <= PersonList.Count; 
         }
 
-        //bind i ukrywanie dodaj do xml bind
+         
     }
 }

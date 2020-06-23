@@ -23,7 +23,7 @@ namespace Rejestracja.ViewModels
         }
         private bool CanAddPerson()
         {
-            return IsValidate; // validacja ok?
+            return IsValidateAdd;  
         }
         private void Add() 
         {
@@ -32,7 +32,7 @@ namespace Rejestracja.ViewModels
             else
                 NewPerson = new Doctor(Name, Surname, Pesel);
 
-            MessageBox.Show($"Pomyślnie dodano {NewPerson.Name} {NewPerson.Surname}");
+           // MessageBox.Show($"Pomyślnie dodano {NewPerson.Name} {NewPerson.Surname}");
         }
     }
 }

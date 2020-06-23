@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Messaging;
 using Rejestracja.ViewModels;
 namespace Rejestracja.Views
 {
@@ -19,15 +20,18 @@ namespace Rejestracja.Views
     /// Logika interakcji dla klasy AddPerson.xaml
     /// </summary>
     public partial class AddPersonView : Page
-    { 
-       
+    {
+        static bool isRegistered = false;
         public AddPersonView(int MenuID) 
-        { 
-            
+        {   
           InitializeComponent();
             this.DataContext  = new AddPersonViewModel(MenuID);
-
+            if (!isRegistered)
+            {
+               // Messenger.Default.Register<MyMessage>(this.DataContext, MyMessage.ProcessMessage);
+                isRegistered = true;
+            }
         }
-
+        
     }
 }

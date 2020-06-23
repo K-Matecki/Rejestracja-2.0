@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+ 
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Messaging;
 using Rejestracja.Models;
 namespace Rejestracja.ViewModels
 {
@@ -15,7 +13,12 @@ namespace Rejestracja.ViewModels
         private List<Person> PersonList = new List<Person>();
         public int Index { get; set; }
         public ICommand RemoveComand { get; }
+ 
+      
+
         private List<string> _comboBoxRemove;
+       
+
         public List<string> ComboBoxRemove
         {
             get
@@ -33,7 +36,7 @@ namespace Rejestracja.ViewModels
         {
             Menu = MenuID;
             Update();
-            RemoveComand= new RelayCommand(Remove, CanRemove);
+            RemoveComand= new RelayCommand(Remove, CanBeRemove);
             Index = -1;
         }
         private void Update() 
@@ -55,26 +58,32 @@ namespace Rejestracja.ViewModels
         }
         private void Remove()
         {
+            string TextMessage="";
             switch (Menu)
             {
                 case 2:
                 case 6:
                     if (PersonList[Index].Remove())
-                        MessageBox.Show($"Usunięto {PersonList[Index].Name} {PersonList[Index].Surname}");
+                        TextMessage=$"Usunięto {PersonList[Index].Name} {PersonList[Index].Surname}";
                     break;
                 case 10:
                     if (AppointmentList[Index].Remove())
-                        MessageBox.Show($"Usunięto termin z dnia: {AppointmentList[Index].AppointmentDate.ToString()}");
+                        TextMessage=$"Usunięto termin z dnia: {AppointmentList[Index].AppointmentDate.ToString()}";
                     break;
             }
+            Messenger.Default.Send<MyMessage>(new MyMessage { MessageText = TextMessage });
             Update();
-
+            
         }
-        private bool CanRemove() 
+        private bool CanBeRemove() 
         {
-            return Index > -1 && Menu ==10? Index <= AppointmentList.Count : Index <= PersonList.Count; 
+            if (Index < 0)
+                return false;
+
+            return Menu ==10? Index <= AppointmentList.Count : Index <= PersonList.Count; 
         }
 
-         
+
+      
     }
 }

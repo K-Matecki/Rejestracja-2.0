@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Messaging;
 using Rejestracja.ViewModels;
 namespace Rejestracja.Views
 {
@@ -20,14 +21,13 @@ namespace Rejestracja.Views
     /// </summary>
     public partial class ShowTableView : Page
     {
-        
-      
-         public ShowTableView(int MenuId) 
+         
+        public ShowTableView(int MenuId) 
          {
             InitializeComponent();
             this.DataContext=new ShowPersonTableViewModel(MenuId);
            
-         }
+        }
 
     
          

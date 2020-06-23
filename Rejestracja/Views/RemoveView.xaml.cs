@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Messaging;
 using Rejestracja.ViewModels;
 namespace Rejestracja.Views
 {
@@ -20,15 +21,12 @@ namespace Rejestracja.Views
     /// </summary>
     public partial class RemoveView : Page 
     {
-        //private List<Appointment> AppointmentList = new List<Appointment>();
-        //private List<Person> PersonList = new List<Person>();
-   
-      
         public RemoveView(int MenuID)
         {
             InitializeComponent();
-            this.DataContext = new RemoveViewModel(MenuID); 
+            this.DataContext = new RemoveViewModel(MenuID);
+          
         }
-
+       
     }
 }

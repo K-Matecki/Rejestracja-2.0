@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using GalaSoft.MvvmLight.Messaging;
 using Rejestracja.Models;
 
 namespace Rejestracja.ViewModels
@@ -23,7 +18,7 @@ namespace Rejestracja.ViewModels
         }
         private bool CanAddPerson()
         {
-            return IsValidateAdd;  
+            return IsValidateEdit;  
         }
         private void Add() 
         {
@@ -31,8 +26,8 @@ namespace Rejestracja.ViewModels
                 NewPerson = new Patient(Name, Surname, Pesel);
             else
                 NewPerson = new Doctor(Name, Surname, Pesel);
-
-           // MessageBox.Show($"Pomyślnie dodano {NewPerson.Name} {NewPerson.Surname}");
+            Messenger.Default.Send<MyMessage>(new MyMessage { MessageText = $"Pomyślnie dodano {NewPerson.Name} {NewPerson.Surname}" });
+             
         }
     }
 }

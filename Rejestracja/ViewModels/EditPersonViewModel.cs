@@ -62,7 +62,6 @@ namespace Rejestracja.ViewModels
         private void Change() {
             Name =  PersonList[Index].Name;
             Surname =  PersonList[Index].Surname;
-            Pesel = PersonList[Index].Pesel;
         }
     }
 }

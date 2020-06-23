@@ -61,3 +61,13 @@ X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\System.Windows.Inte
 X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\Caliburn.Micro.xml
 X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\Caliburn.Micro.Platform.xml
 X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\Caliburn.Micro.Platform.Core.xml
+X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\CommonServiceLocator.dll
+X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\GalaSoft.MvvmLight.dll
+X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\GalaSoft.MvvmLight.pdb
+X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\GalaSoft.MvvmLight.xml
+X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\bin\Debug\GalaSoft.MvvmLight.Platform.xml

@@ -15,7 +15,8 @@ using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
 using System.ComponentModel;
 using Rejestracja.ViewModels;
- 
+using GalaSoft.MvvmLight.Messaging;
+
 namespace Rejestracja.Views
 {
     /// <summary>
@@ -32,11 +33,11 @@ namespace Rejestracja.Views
             {
                 Menu.Children.Add(new UserControlMenuItem(item, this));
             }
-           
+            Messenger.Default.Register<MyMessage>(Main, MyMessage.ProcessMessage);
         }
 
-
-       internal void SwitchScreen(int Id)
+         
+        internal void SwitchScreen(int Id)
         {
             
             switch (Id)

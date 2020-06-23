@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Messaging;
 using Rejestracja.ViewModels;
 namespace Rejestracja.Views
 {
@@ -20,17 +21,19 @@ namespace Rejestracja.Views
     /// </summary>
     public partial class EditPersonView : Page
     {
-       
-        public EditPersonView()
+        static bool isRegistered = false;
+        public EditPersonView(int MenuID)  
         {
             InitializeComponent();
-        }
-        public EditPersonView(int MenuID) : this()
-        {
             this.DataContext = new EditPersonViewModel(MenuID);
+            if (!isRegistered)
+            {   
+                //Messenger.Default.Register<MyMessage>(this.DataContext, MyMessage.ProcessMessage);
+                isRegistered = true;
+            }
         }
-      
 
         
+
     }
 }

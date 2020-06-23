@@ -1,12 +1,7 @@
-﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Rejestracja.Models;
 using System.Windows.Input;
-using System.Windows;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Rejestracja.ViewModels
 {
@@ -43,10 +38,12 @@ namespace Rejestracja.ViewModels
         private void Add()
         {
             NewAppointment = new Appointment(DateToAdd, DoctorList[IndexDoctor], PatientList[IndexPatient]);
-           // MessageBox.Show("Pomyślnie dodano termin");
+            Messenger.Default.Send<MyMessage>(new MyMessage { MessageText = "Pomyślnie dodano termin" }); 
         }
         private bool CanAddAppointment()
         {
+            if (IndexDoctor == -1 || IndexPatient == -1)
+                return false;
             return IndexDoctor  <=  DoctorList.Count - 1 && IndexPatient <= PatientList.Count - 1;
         }
     

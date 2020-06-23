@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Input;
-using Caliburn.Micro;
+using GalaSoft.MvvmLight.Messaging;
 using Rejestracja.Models;
 namespace Rejestracja.ViewModels
 {//, IHandle<string>
@@ -53,14 +52,18 @@ namespace Rejestracja.ViewModels
         }
         private bool CanEditAppointment()
         {
-            return Index > -1 && Index  <= AppointmentList.Count;
+            if (Index == -1)
+                return false;
+            return  Index  <= AppointmentList.Count-1;
         }
         private void Edit()
         {
-           if( AppointmentList[Index].Edit(DateToAdd))
-             MessageBox.Show("Pomyślna Edycja");  
-           else
-             MessageBox.Show("Nieudana edycja");
+            string TextMessage="";
+           if ( AppointmentList[Index].Edit(DateToAdd))
+                TextMessage="Pomyślna Edycja";
+            else
+            TextMessage="Nieudana edycja";
+            Messenger.Default.Send<MyMessage>(new MyMessage { MessageText = TextMessage });
             Update();
         }
         private void Update()

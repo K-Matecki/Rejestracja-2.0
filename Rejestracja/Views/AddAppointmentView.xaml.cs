@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Caliburn.Micro;
+using GalaSoft.MvvmLight.Messaging;
 using Rejestracja.ViewModels;
 namespace Rejestracja.Views
 {
@@ -20,20 +21,24 @@ namespace Rejestracja.Views
     /// Logika interakcji dla klasy AddAppointment.xaml
     /// </summary>
     public partial class AddAppointmentView : Page
-    { 
+    {
+        static bool isRegistered = false;
         public AddAppointmentView()
         {
             InitializeComponent();
             DatapickerAdd.BlackoutDates.AddDatesInPast();
             DatapickerAdd.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddDays(-1)));
- 
+      
             this.DataContext = new AddAppointmentViewModel();
-           
-            
+            if (!isRegistered)
+            {
+               // Messenger.Default.Register<MyMessage>(this.DataContext, MyMessage.ProcessMessage);
+                isRegistered = true;
+            }
         }
 
-     
-        
-        
+         
+
+
     }
 }

@@ -18,7 +18,7 @@ namespace Rejestracja.Models
         public static NpgsqlConnection Connection = new NpgsqlConnection(ConnString);
     
      
-        public static List<string> GetData(string SQLCommand, string TableName)
+        private static List<string> GetData(string SQLCommand, string TableName)
         {
             List<string> DataItems = new List<string>();
             int ColumnNumber = GetColumnNumber(TableName);
@@ -169,11 +169,13 @@ namespace Rejestracja.Models
 
             switch (MenuID)
             {
+                case 1:
                 case 2:
                 case 3:
                 case 4:
                     StringData = GetData("select * from patients", "patients");
                     break;
+                case 5:
                 case 6:
                 case 7:
                 case 8:
@@ -216,9 +218,6 @@ namespace Rejestracja.Models
 
         }
 
-
-    
-        //Do naprawy
         private static List<Appointment> GetAppointmentList(List<string>  DataStringList)
         {
             List<Appointment> AppointmentList = new List<Appointment>();
@@ -236,6 +235,17 @@ namespace Rejestracja.Models
                 AppointmentList.Add(new Appointment(int.Parse(LineAppointment[0]), Convert.ToDateTime(LineAppointment[3]), new Doctor(LineDoctor), new Patient(LinePatient)));
             }
             return AppointmentList;
+        }
+
+        static public List<string> GetPeselList(int MenuId)
+        {
+            List<string> Pesels = new List<string>();
+            var StringData = GetStringDataList(MenuId);
+
+            foreach (var item in StringData)
+                Pesels.Add(item.Split(',')[3]);
+
+            return Pesels;
         }
 
     }

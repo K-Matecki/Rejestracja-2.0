@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using Rejestracja.Models;
 namespace Rejestracja.ViewModels
 {
     public abstract class BasePersonViewModel : ViewModelBase, IDataErrorInfo
     {
         public string Error { get { return null; } }
 
-
-
+        protected int Menu;
         public List<string> _comboBoxPerson;
         private string _name;
         private string _surname;
@@ -36,11 +36,12 @@ namespace Rejestracja.ViewModels
         protected bool IsValidateEdit { get { return ValidateResult[0] && ValidateResult[1]; } }
         protected bool IsValidateAdd { get { return ValidateResult[0] && ValidateResult[1] && ValidateResult[2]; } }
 
-        public BasePersonViewModel()
+        public BasePersonViewModel(int MenuId)
         {
             Name = string.Empty;
             Surname = string.Empty;
             Pesel = string.Empty;
+            Menu= MenuId;
         }
 
         public string this[string PropertyName]
@@ -81,8 +82,10 @@ namespace Rejestracja.ViewModels
                             result = "Pesel musi mieć długość 11 znaków.";
                         else if (CheckPesel(Pesel) == false)
                             result = "Nieprawidłowy Pesel";
+                        else if(CheckPeselUnique(Pesel))
+                            result = "Osoba z tym peselem istnieje w bazie";
+                        
                         ValidateResult[2] = result == null ? true : false;
-                        //Unique check
                         break;
                 }
                 return result;
@@ -91,8 +94,8 @@ namespace Rejestracja.ViewModels
         }
 
         private bool CheckString(string input)
-        {
-            return Regex.IsMatch(input, @"^[a-zA-Z]+$");
+        { 
+            return Regex.IsMatch(input, @"^[a-ząćęłńóśźżA-ZĄĆĘŁŃÓŚŹŻ]+$");
         }
 
         private bool CheckPesel(string pesel)
@@ -111,9 +114,11 @@ namespace Rejestracja.ViewModels
             return ControlSum % 10 == 0 ? true : false;
         }
 
-        private bool CheckPeselUnique()
+        private bool CheckPeselUnique(string pesel)
         {
-            throw new System.NotImplementedException();
+            var Pesels = DataBase.GetPeselList(Menu);
+            return Pesels.Contains(pesel);
+             
         }
     }
 }

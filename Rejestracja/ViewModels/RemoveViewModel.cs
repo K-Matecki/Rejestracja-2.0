@@ -12,11 +12,7 @@ namespace Rejestracja.ViewModels
         public int Index { get; set; }
         public ICommand RemoveComand { get; }
 
-
-
         private List<string> _comboBoxRemove;
-
-
         public List<string> ComboBoxRemove
         {
             get
@@ -34,7 +30,7 @@ namespace Rejestracja.ViewModels
         {
             Menu = MenuID;
             Update();
-            RemoveComand = new RelayCommand(Remove, CanBeRemove);
+            RemoveComand = new RelayCommand(Remove, CanRemove);
             Index = -1;
         }
         private void Update()
@@ -56,7 +52,7 @@ namespace Rejestracja.ViewModels
         }
         private void Remove()
         {
-            string TextMessage = "";
+            string TextMessage = "Nie udało się usunąć terminu";
             switch (Menu)
             {
                 case 2:
@@ -68,12 +64,11 @@ namespace Rejestracja.ViewModels
                     if (AppointmentList[Index].Remove())
                         TextMessage = $"Usunięto termin z dnia: {AppointmentList[Index].AppointmentDate.ToString()}";
                     break;
-            }
+            } 
             Messenger.Default.Send<MyMessage>(new MyMessage { MessageText = TextMessage });
             Update();
-
         }
-        private bool CanBeRemove()
+        private bool CanRemove()
         {
             if (Index < 0)
                 return false;

@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\obj\Debug\
+X:\Desktop\Programowanie\Rejestracja 2.0\Rejestracja\Rejestracja\obj\Debug\
 Rejestracja
 none
 false
 DEBUG;TRACE
-X:\Desktop\Rejestracja 2.0\Rejestracja\Rejestracja\App.xaml
+X:\Desktop\Programowanie\Rejestracja 2.0\Rejestracja\Rejestracja\App.xaml
 9-1314977366
 
 331092974681
-138102403494
+138-839500037
 Views\AddAppointmentView.xaml;Views\AddPersonView.xaml;Views\EditAppointmentView.xaml;Views\EditPersonView.xaml;Views\MainView.xaml;Views\RemoveView.xaml;Views\ShowAppointmentView.xaml;Views\ShowTableView.xaml;Views\UserControlMenuItemView.xaml;
 
 False

@@ -10,9 +10,9 @@ namespace Rejestracja.ViewModels
         public ICommand AddPersonCommand { get; }
         private bool SelectedPerson;
 
-        public AddPersonViewModel(int MenuID) : base()
+        public AddPersonViewModel(int MenuID) : base(MenuID)
         {
-            SelectedPerson = MenuID == 1 ? true : false;
+            SelectedPerson = Menu == 1 ? true : false;
             AddPersonCommand = new RelayCommand(Add, CanAddPerson);
 
         }

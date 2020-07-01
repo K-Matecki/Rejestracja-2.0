@@ -8,13 +8,13 @@ namespace Rejestracja.ViewModels
     class EditPersonViewModel : BasePersonViewModel
     {
         public int Index { get; set; }
-        private int Menu;
+        
         private List<Person> PersonList = new List<Person>();
         public ICommand EditPersonCommand { get; }
         public ICommand SelectionChangedCommand { get; }
-        public EditPersonViewModel(int MenuID) : base()
+        public EditPersonViewModel(int MenuID) : base(MenuID)
         {
-            Menu = MenuID;
+             
             Update();
             EditPersonCommand = new RelayCommand(Edit, CanEditPerson);
             SelectionChangedCommand = new RelayCommand(Change);

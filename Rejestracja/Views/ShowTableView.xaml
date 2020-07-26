@@ -14,18 +14,18 @@
         <Grid HorizontalAlignment="Left" Height="419" Margin="-2,10,0,0" VerticalAlignment="Top" Width="802">
             
             <Label Content="Wybierz" HorizontalAlignment="Left" Margin="267,85,0,0" VerticalAlignment="Top" Height="39" RenderTransformOrigin="0.5,0.5" Width="230"/>
-            <DataGrid Name="AppointmentsTableDoctor" ItemsSource="{Binding AppointmentList}" Visibility="{Binding ShouldBeVisible[0],Converter={StaticResource booleanToVisibilityConverter}}" AutoGenerateColumns="False" Margin="135,290,285,43" IsReadOnly="True" CanUserSortColumns = "False" CanUserAddRows="False">
+            <DataGrid Name="AppointmentsTableDoctor" ItemsSource="{Binding AppointmentList}" Visibility="{Binding ShouldBeVisible[0],Converter={StaticResource BooleanToVisibilityConverter}}" AutoGenerateColumns="False" Margin="135,271,265,24" IsReadOnly="True" CanUserSortColumns = "False" CanUserAddRows="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Termin" Binding="{Binding AppointmentDate}" />
-                    <DataGridTextColumn Header="Imie Pacjenta" Binding="{Binding Patient.Name}" />
-                    <DataGridTextColumn Header="Nazwisko Pacjenta" Binding="{Binding Patient.Surname}" />
+                    <DataGridTextColumn Header="Termin" Binding="{Binding Path=AppointmentDate}" />
+                    <DataGridTextColumn Header="Imie i nazwisko pacjenta" Binding="{Binding PatientFullName}" />
+                    
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid Name="AppointmentsTablePatient" ItemsSource="{Binding AppointmentList}"  Visibility="{Binding ShouldBeVisible[1],Converter={StaticResource booleanToVisibilityConverter}}" AutoGenerateColumns="True" Margin="135,290,285,0" IsReadOnly="True" CanUserSortColumns = "False" CanUserAddRows="False">
+            <DataGrid Name="AppointmentsTablePatient" ItemsSource="{Binding AppointmentList}" Visibility="{Binding ShouldBeVisible[1],Converter={StaticResource BooleanToVisibilityConverter}}" AutoGenerateColumns="False" Margin="135,271,265,24" IsReadOnly="True" CanUserAddRows="False" CanUserSortColumns = "False" SelectionChanged="AppointmentsTablePatient_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Termin" Binding="{Binding  AppointmentDate}" />
-                    <DataGridTextColumn Header="Imię lekarza" Binding="{Binding  Doctor.Name}" />
-                    <DataGridTextColumn Header="Nazwisko lekarza" Binding="{Binding Doctor.Surname}" />
+                   
+                    <DataGridTextColumn Header="Imie i nazwisko Lekarza" Binding="{Binding DoctorFullName}"/>
+                    <DataGridTextColumn Header="Termin" Binding="{Binding Path=AppointmentDate}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <ComboBox Name="ComboBoxShow" ItemsSource="{Binding ComboBoxPerson}" SelectedIndex="{Binding Index,Mode=TwoWay}" HorizontalAlignment="Left" Margin="135,132,0,0" VerticalAlignment="Top" Width="382">
@@ -35,7 +35,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ComboBox>
-            <DataGrid Name="PersonTable" ItemsSource="{Binding SelectedPerson}" AutoGenerateColumns="False" Margin="135,180,285,153" IsReadOnly="True" CanUserAddRows="False" CanUserSortColumns = "False">
+            <DataGrid Name="PersonTable" ItemsSource="{Binding SelectedPerson}"  AutoGenerateColumns="False" Margin="135,180,285,153" IsReadOnly="True" CanUserAddRows="False" CanUserSortColumns = "False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Imie" Binding="{Binding Path=Name}" />
                     <DataGridTextColumn Header="Nazwisko" Binding="{Binding Path=Surname}" />

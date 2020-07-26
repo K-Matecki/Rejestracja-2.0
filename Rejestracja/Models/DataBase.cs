@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Npgsql;
-using System.Windows;
+ 
 namespace Rejestracja.Models
 {
     class DataBase
@@ -15,18 +12,26 @@ namespace Rejestracja.Models
         private static string Password = "123";
         private static string Port = "5432";
         private static string ConnString = String.Format($"Server={Host};Username={User};Database={DBname};Port={Port};Password={Password};SSLMode=Prefer");
-        public static NpgsqlConnection Connection = new NpgsqlConnection(ConnString);
-    
-     
+        private static NpgsqlConnection Connection = new NpgsqlConnection(ConnString);
+        
+        static  public bool Open()
+        {
+             Connection.Open();
+            return DataBase.Connection == null || DataBase.Connection.State != System.Data.ConnectionState.Open;
+        }
+        static public void Close()
+        {
+            Connection.Close();
+        }
+
         private static List<string> GetData(string SQLCommand, string TableName)
         {
             List<string> DataItems = new List<string>();
             int ColumnNumber = GetColumnNumber(TableName);
             string AddString = "";
             try
-            {
-                
-                  var Command = new NpgsqlCommand(SQLCommand, Connection);
+            { 
+                var Command = new NpgsqlCommand(SQLCommand, Connection);
                 NpgsqlDataReader DataReader = Command.ExecuteReader();
                 
                 while (DataReader.Read())
@@ -60,8 +65,8 @@ namespace Rejestracja.Models
                 return true;
             }
             catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
+            { //refactoring 
+                Console.WriteLine(e.Message);
                 return false;
             }
 
@@ -158,7 +163,7 @@ namespace Rejestracja.Models
             AppointmentList = GetAppointmentList(StringData);
             foreach (var item in AppointmentList)
             {
-                ComboBoxList.Add($"{item.Doctor.Name} {item.Doctor.Surname}|{item.Patient.Name} {item.Patient.Surname}|{item.AppointmentDate.ToString()} ");
+                ComboBoxList.Add($"{item.DoctorFullName} |{item.PatientFullName}|{item.AppointmentDate.ToString()} ");
             }
             return (ComboBoxList, AppointmentList);
         }

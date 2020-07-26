@@ -15,16 +15,12 @@ namespace Rejestracja
     {
         private void AppStartup(object sender, StartupEventArgs args)
         {
-            DataBase.Connection.Open();
-            if (DataBase.Connection == null || DataBase.Connection.State != System.Data.ConnectionState.Open)
-            {
-                MessageBox.Show("Nieprawidłowe połączenie z baza");
-                Current.Shutdown();
-            }
+            if(DataBase.Open())
+            Current.Shutdown();
         }
         private void AppExit(object sender, ExitEventArgs e) 
         {
-            DataBase.Connection.Close();
+            DataBase.Close();
         }
     }
 }

@@ -28,6 +28,10 @@ namespace Rejestracja.Views
             this.DataContext=new ShowPersonTableViewModel(MenuId);
            
         }
-   
+
+        private void AppointmentsTablePatient_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

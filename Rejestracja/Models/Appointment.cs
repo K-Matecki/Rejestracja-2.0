@@ -9,42 +9,45 @@ using System.Windows;
 namespace Rejestracja.Models
 {
     public class Appointment    
-    {
-        
-        public Doctor Doctor;
-        public Patient Patient;
-        public int IdAppointment { get;  }
+    { 
+        private int IdDoctor;
+        private int IdPatient;
+        public int IdAppointment { get;}
         public DateTime AppointmentDate { get; private set; }
-         
+        public string PatientFullName { get; }
+        public string DoctorFullName { get; }
+
         public Appointment()
         {
-            Doctor = null;
-            Patient = null;
+            IdPatient= GetHashCode();
+            IdDoctor = GetHashCode();
             AppointmentDate = new DateTime();
             IdAppointment = GetHashCode();
         }
-        public Appointment(DateTime data, Person lekarz, Person pacjent) 
+        public Appointment(DateTime date, Person doctor, Person patient) 
         {
-            Doctor =  (Doctor)lekarz;
-            Patient =  (Patient)pacjent;
-            AppointmentDate = data;
+            IdDoctor =  ((Doctor)doctor).IdDoctor;
+            IdPatient =  ((Patient)patient).IdPatient;
+            AppointmentDate = date;
             Add();
             IdAppointment = DataBase.GetIndex("appointments");
-
+            DoctorFullName = doctor.Name + " " + doctor.Surname;
+            PatientFullName = patient.Name + " " + patient.Surname;
         }
-        public Appointment(int id,DateTime data, Doctor lekarz, Patient pacjent) 
+        public Appointment(int id,DateTime date, Doctor doctor, Patient patient) 
         {
-            Doctor = (Doctor)lekarz;
-            Patient = (Patient)pacjent;
-            AppointmentDate = data;
+            IdDoctor = ((Doctor)doctor).IdDoctor;
+            IdPatient = ((Patient)patient).IdPatient;
+            AppointmentDate = date;
             IdAppointment = id;
+            DoctorFullName = $"{doctor.Name}  {doctor.Surname}";
+            PatientFullName =$"{patient.Name} {patient.Surname}";
         }
        //funkcja dodająca obiekt do bazy ustawia id obiektu zgodne z rekordem w bazie 
         private void Add()
         {  
-           if (!DataBase.ModifyData($"INSERT INTO Appointments(id_doctor,id_patient,date) VALUES({Doctor.IdDoctor},{Patient.IdPatient},'{AppointmentDate}')"))
-                throw new Exception("Nieudane połączenie z baza ");
-       
+           if (!DataBase.ModifyData($"INSERT INTO Appointments(id_doctor,id_patient,date) VALUES({IdDoctor},{IdPatient},'{AppointmentDate}')"))
+                throw new Exception("Nieudane połączenie z baza");
         }
 
         public  bool Edit(DateTime date)
